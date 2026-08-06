@@ -1,3 +1,4 @@
+
 Todos os projetos
 biblioteca central
 
@@ -510,27 +511,6 @@ index.html
   .admin-tabs button.active{ color:var(--accent-dark); border-color:var(--accent); font-weight:600; }
   .admin-panel{ display:none; }
   .admin-panel.show{ display:block; }
-  .circ-panel{ display:none; }
-  .circ-panel.show{ display:block; }
-  .row-actions{ display:flex; gap:6px; flex-wrap:wrap; }
-  .row-actions button{
-    background:transparent; border:1px solid var(--card-line); color:var(--ink-soft);
-    padding:4px 9px; border-radius:4px; font-size:.72rem; font-family:'Special Elite';
-  }
-  .row-actions button:hover{ border-color:var(--accent); color:var(--accent-dark); }
-  .row-actions button.danger:hover{ border-color:var(--stamp); color:var(--stamp); }
-  .role-pill{
-    font-family:'Special Elite'; font-size:.62rem; padding:2px 8px; border-radius:10px;
-    background:var(--brown-700); color:#F3E8D2; letter-spacing:.03em;
-  }
-  .role-pill.bibliotecario{ background:var(--accent); color:var(--brown-900); }
-  .quick-result{
-    display:flex; justify-content:space-between; align-items:center; gap:10px;
-    padding:8px 6px; border-bottom:1px dashed var(--card-line); font-size:.85rem; flex-wrap:wrap;
-  }
-  .quick-result:last-child{ border-bottom:none; }
-  .export-row{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:18px; }
-  .abono-row{ display:flex; align-items:center; gap:8px; font-size:.78rem; color:var(--ink-soft); margin:6px 0; }
   table{ width:100%; border-collapse:collapse; font-size:.85rem; }
   th, td{ text-align:left; padding:8px 6px; border-bottom:1px solid var(--card-line); }
   th{ font-family:'Special Elite'; font-size:.66rem; letter-spacing:.04em; color:var(--ink-soft); text-transform:uppercase;}
@@ -786,29 +766,15 @@ index.html
 
     <div class="admin-tabs" id="adminTabs">
       <button data-tab="painel" class="active">Dashboard</button>
-      <button data-tab="estoque">Acervo</button>
-      <button data-tab="circulacao">Circulação</button>
-      <button data-tab="usuarios">Usuários</button>
+      <button data-tab="estoque">Estoque</button>
       <button data-tab="procurados">Mais procurados</button>
       <button data-tab="avaliacoes">Avaliações</button>
+      <button data-tab="transacoes">Empréstimos / Devoluções</button>
       <button data-tab="novo">Adicionar livro</button>
       <button data-tab="config">Configurações</button>
     </div>
 
     <div class="admin-panel show" id="tab-painel">
-      <div class="chart-box wide" style="margin-bottom:18px;">
-        <h4>Baixa rápida de empréstimo</h4>
-        <p class="field-hint" style="margin:-4px 0 8px;">Digite o nome do leitor ou o título do livro para localizar e devolver rapidamente no balcão.</p>
-        <div class="search-row" style="max-width:520px;">
-          <input type="text" id="baixaRapidaInput" placeholder="Nome do leitor ou título do livro...">
-        </div>
-        <div id="baixaRapidaResults"></div>
-      </div>
-      <div class="export-row">
-        <button class="btn small ghost" id="exportInventarioCsv">Exportar inventário (CSV)</button>
-        <button class="btn small ghost" id="exportAtrasadosCsv">Exportar atrasados (CSV)</button>
-        <button class="btn small ghost" id="exportUsuariosCsvDash">Exportar usuários (CSV)</button>
-      </div>
       <div class="chart-grid">
         <div class="chart-box wide"><h4>Empréstimos por mês</h4><canvas id="chartMes" height="90"></canvas></div>
         <div class="chart-box"><h4>Livros mais emprestados</h4><canvas id="chartTop" height="140"></canvas></div>
@@ -817,11 +783,8 @@ index.html
     </div>
 
     <div class="admin-panel" id="tab-estoque">
-      <div class="search-row" style="margin-bottom:14px; max-width:420px;">
-        <input type="text" id="estoqueSearchInput" placeholder="Buscar por título, autor ou ISBN...">
-      </div>
       <table>
-        <thead><tr><th>Livro</th><th>ISBN</th><th>Gênero</th><th>Total</th><th>Disponível</th><th>Emprestados</th><th>Ações</th></tr></thead>
+        <thead><tr><th>Livro</th><th>ISBN</th><th>Gênero</th><th>Total</th><th>Disponível</th><th>Emprestados</th></tr></thead>
         <tbody id="estoqueBody"></tbody>
       </table>
     </div>
@@ -834,38 +797,12 @@ index.html
       <div id="avaliacoesList"></div>
     </div>
 
-    <div class="admin-panel" id="tab-circulacao">
-      <div class="admin-tabs" id="circTabs" style="margin-bottom:16px;">
-        <button data-ctab="novo" class="active">Registrar empréstimo</button>
-        <button data-ctab="ativos">Ativos / Atrasados</button>
-        <button data-ctab="historico">Histórico</button>
-      </div>
-
-      <div class="circ-panel show" id="circ-novo">
-        <div class="field-2col">
-          <div class="field"><label>Leitor</label><select id="circUsuario"></select></div>
-          <div class="field"><label>Livro disponível</label><select id="circLivro"></select></div>
-        </div>
-        <button class="btn" id="circRegistrarBtn">Registrar empréstimo</button>
-      </div>
-
-      <div class="circ-panel" id="circ-ativos">
-        <div class="search-row" style="margin-bottom:14px; max-width:420px;">
-          <input type="text" id="circAtivosSearch" placeholder="Buscar por leitor ou livro...">
-        </div>
-        <div id="circAtivosList"></div>
-      </div>
-
-      <div class="circ-panel" id="circ-historico">
-        <div class="search-row" style="margin-bottom:14px; max-width:420px;">
-          <input type="text" id="circHistoricoSearch" placeholder="Buscar por leitor ou livro...">
-        </div>
-        <button class="btn small ghost" id="exportHistoricoCsv" style="margin-bottom:12px;">Exportar CSV</button>
-        <table>
-          <thead><tr><th>Data</th><th>Tipo</th><th>Livro</th><th>Usuário</th><th>Multa</th></tr></thead>
-          <tbody id="transBody"></tbody>
-        </table>
-      </div>
+    <div class="admin-panel" id="tab-transacoes">
+      <h3 style="font-size:1rem; margin-bottom:8px;">Últimos movimentos</h3>
+      <table>
+        <thead><tr><th>Data</th><th>Tipo</th><th>Livro</th><th>Usuário</th><th>Multa</th></tr></thead>
+        <tbody id="transBody"></tbody>
+      </table>
     </div>
 
     <div class="admin-panel" id="tab-novo">
@@ -908,17 +845,6 @@ index.html
       <button class="btn" id="addBookBtn">Adicionar à biblioteca</button>
     </div>
 
-    <div class="admin-panel" id="tab-usuarios">
-      <div class="search-row" style="margin-bottom:14px; max-width:420px;">
-        <input type="text" id="usuariosSearchInput" placeholder="Buscar por nome ou e-mail...">
-      </div>
-      <button class="btn small ghost" id="exportUsuariosCsv" style="margin-bottom:12px;">Exportar CSV</button>
-      <table>
-        <thead><tr><th>Nome</th><th>E-mail</th><th>Perfil</th><th>Empréstimos</th><th>Ações</th></tr></thead>
-        <tbody id="usuariosBody"></tbody>
-      </table>
-    </div>
-
     <div class="admin-panel" id="tab-config">
       <div class="field-2col">
         <div class="field"><label>Prazo padrão de empréstimo (dias)</label><input id="cfgPrazo" type="number" min="1"></div>
@@ -927,37 +853,6 @@ index.html
       <button class="btn" id="saveConfigBtn">Salvar configurações</button>
       <p class="field-hint" style="margin-top:14px;">Essas configurações valem para novos empréstimos e para o cálculo de multas nas devoluções.</p>
     </div>
-  </div>
-</div>
-
-<!-- EDIT BOOK MODAL (admin) -->
-<div class="overlay" id="editBookOverlay">
-  <div class="modal">
-    <button class="close" data-close="editBookOverlay">×</button>
-    <h2>Editar livro</h2>
-    <input type="hidden" id="eBookId">
-    <div class="field"><label>Título</label><input id="eTitulo"></div>
-    <div class="field-2col">
-      <div class="field"><label>Autor</label><input id="eAutor"></div>
-      <div class="field"><label>ISBN</label><input id="eIsbn"></div>
-    </div>
-    <div class="field-2col">
-      <div class="field"><label>Editora</label><input id="eEditora"></div>
-      <div class="field"><label>Ano de publicação</label><input id="eAno" type="number"></div>
-    </div>
-    <div class="field-2col">
-      <div class="field"><label>Categoria / Gênero</label><input id="eGenero"></div>
-      <div class="field"><label>Número de páginas</label><input id="ePaginas" type="number" min="0"></div>
-    </div>
-    <div class="field-2col">
-      <div class="field"><label>Idioma original</label><input id="eIdioma"></div>
-      <div class="field"><label>Tradução (se houver)</label><input id="eTraducao"></div>
-    </div>
-    <div class="field"><label>Sinopse</label><textarea id="eSinopse"></textarea></div>
-    <div class="field"><label>Quantidade em estoque (total)</label><input id="eEstoqueTotal" type="number" min="0"></div>
-    <div class="field-hint" id="eEstoqueHint" style="margin-bottom:10px;"></div>
-    <div class="err" id="editBookErr">Preencha ao menos título e autor.</div>
-    <button class="btn" id="saveEditBookBtn" style="width:100%;">Salvar alterações</button>
   </div>
 </div>
 
@@ -1951,10 +1846,10 @@ function renderAdmin(){
     <div class="stat"><div class="num">${totalAvaliacoes}</div><div class="label">AVALIAÇÕES REAIS</div></div>
   `;
 
-  renderEstoqueTable();
-  renderCirculacaoAll();
-  renderUsuariosTable();
-  renderBaixaRapida();
+  document.getElementById('estoqueBody').innerHTML = DB.books.map(b=>{
+    const emprestados = DB.loans.filter(l=>l.bookId===b.id && l.status==='ativo').length;
+    return `<tr><td>${escapeHTML(b.titulo)}</td><td>${escapeHTML(b.isbn||'—')}</td><td>${escapeHTML(b.genero)}</td><td>${b.estoqueTotal}</td><td>${b.estoqueDisp}</td><td>${emprestados}</td></tr>`;
+  }).join('');
 
   const searchEntries = Object.entries(DB.searchLog).sort((a,b)=>b[1]-a[1]).slice(0,12);
   document.getElementById('procuradosList').innerHTML = searchEntries.length
@@ -1967,428 +1862,18 @@ function renderAdmin(){
     ? revs.slice().reverse().map(r=>`<div class="review"><strong>${escapeHTML(r.titulo)}</strong> — <span class="stars">${'★'.repeat(r.nota)}${'☆'.repeat(5-r.nota)}</span> <small>(${escapeHTML(r.nome||'leitor')})</small><br>${r.com ? escapeHTML(r.com) : '<small>sem comentário</small>'}</div>`).join('')
     : '<div class="empty">Nenhuma avaliação real registrada ainda.</div>';
 
-  document.getElementById('cfgPrazo').value = DB.settings.prazoDias;
-  document.getElementById('cfgMulta').value = DB.settings.multaPorDia;
-
-  renderDashboardCharts();
-}
-
-/* ---------------------------------------------------------
-   ACERVO (aba "Acervo" do admin) — busca, editar, excluir
-   --------------------------------------------------------- */
-function renderEstoqueTable(){
-  const termo = normalize(document.getElementById('estoqueSearchInput') ? document.getElementById('estoqueSearchInput').value : '');
-  const lista = DB.books.filter(b=>{
-    if(!termo) return true;
-    const hay = normalize(b.titulo + ' ' + b.autor + ' ' + (b.isbn||''));
-    return hay.includes(termo);
-  });
-  document.getElementById('estoqueBody').innerHTML = lista.length ? lista.map(b=>{
-    const emprestados = DB.loans.filter(l=>l.bookId===b.id && l.status==='ativo').length;
-    return `<tr>
-      <td>${escapeHTML(b.titulo)}</td><td>${escapeHTML(b.isbn||'—')}</td><td>${escapeHTML(b.genero)}</td>
-      <td>${b.estoqueTotal}</td><td>${b.estoqueDisp}</td><td>${emprestados}</td>
-      <td><div class="row-actions">
-        <button data-edit-book="${b.id}">Editar</button>
-        <button data-del-book="${b.id}" class="danger">Excluir</button>
-      </div></td>
-    </tr>`;
-  }).join('') : `<tr><td colspan="7" class="empty">Nenhum livro encontrado com esse critério.</td></tr>`;
-}
-
-function openEditBook(id){
-  const b = DB.books.find(x=>x.id===id);
-  if(!b) return;
-  document.getElementById('eBookId').value = b.id;
-  document.getElementById('eTitulo').value = b.titulo || '';
-  document.getElementById('eAutor').value = b.autor || '';
-  document.getElementById('eIsbn').value = b.isbn || '';
-  document.getElementById('eEditora').value = b.editora || '';
-  document.getElementById('eAno').value = b.ano || '';
-  document.getElementById('eGenero').value = b.genero || '';
-  document.getElementById('ePaginas').value = b.paginas || '';
-  document.getElementById('eIdioma').value = b.idioma || '';
-  document.getElementById('eTraducao').value = b.traducao || '';
-  document.getElementById('eSinopse').value = b.sinopse || '';
-  document.getElementById('eEstoqueTotal').value = b.estoqueTotal;
-  const emprestados = DB.loans.filter(l=>l.bookId===b.id && l.status==='ativo').length;
-  document.getElementById('eEstoqueHint').textContent = `Atualmente ${emprestados} exemplar(es) emprestado(s) e ${b.estoqueDisp} disponível(is).`;
-  document.getElementById('editBookErr').style.display = 'none';
-  document.getElementById('editBookOverlay').classList.add('show');
-}
-
-function deleteBook(id){
-  const b = DB.books.find(x=>x.id===id);
-  if(!b) return;
-  const emprestados = DB.loans.filter(l=>l.bookId===b.id && l.status==='ativo').length;
-  if(emprestados > 0){
-    showToast('Não é possível excluir: há exemplares emprestados deste livro.');
-    return;
-  }
-  if(!confirm(`Excluir "${b.titulo}" definitivamente do acervo?`)) return;
-  DB.books = DB.books.filter(x=>x.id!==id);
-  saveDB();
-  showToast('Livro removido do acervo.');
-  renderEstoqueTable();
-  renderFilters();
-  renderGrid();
-  renderShelf();
-  renderCirculacaoAll();
-}
-
-document.getElementById('estoqueBody').addEventListener('click', e=>{
-  const editBtn = e.target.closest('[data-edit-book]');
-  if(editBtn){ openEditBook(editBtn.dataset.editBook); return; }
-  const delBtn = e.target.closest('[data-del-book]');
-  if(delBtn){ deleteBook(delBtn.dataset.delBook); }
-});
-
-document.getElementById('estoqueSearchInput').addEventListener('input', renderEstoqueTable);
-
-document.getElementById('saveEditBookBtn').onclick = ()=>{
-  const id = document.getElementById('eBookId').value;
-  const b = DB.books.find(x=>x.id===id);
-  if(!b) return;
-  const titulo = document.getElementById('eTitulo').value.trim();
-  const autor = document.getElementById('eAutor').value.trim();
-  const err = document.getElementById('editBookErr');
-  if(!titulo || !autor){ err.style.display = 'block'; return; }
-  err.style.display = 'none';
-
-  const novoTotal = Math.max(0, parseInt(document.getElementById('eEstoqueTotal').value, 10) || 0);
-  const emprestados = DB.loans.filter(l=>l.bookId===b.id && l.status==='ativo').length;
-  b.titulo = titulo;
-  b.autor = autor;
-  b.isbn = document.getElementById('eIsbn').value.trim();
-  b.editora = document.getElementById('eEditora').value.trim();
-  b.ano = document.getElementById('eAno').value.trim();
-  b.genero = document.getElementById('eGenero').value.trim() || 'Geral';
-  b.paginas = document.getElementById('ePaginas').value.trim();
-  b.idioma = document.getElementById('eIdioma').value.trim() || 'Português';
-  b.traducao = document.getElementById('eTraducao').value.trim();
-  b.sinopse = document.getElementById('eSinopse').value.trim();
-  b.estoqueTotal = Math.max(novoTotal, emprestados);
-  b.estoqueDisp = Math.max(0, b.estoqueTotal - emprestados);
-
-  saveDB();
-  closeOverlay('editBookOverlay');
-  showToast('Livro atualizado.');
-  renderEstoqueTable();
-  renderFilters();
-  renderGrid();
-  renderShelf();
-  renderCirculacaoAll();
-};
-
-/* ---------------------------------------------------------
-   CIRCULAÇÃO (aba "Circulação" do admin)
-   --------------------------------------------------------- */
-function renderCirculacaoAll(){
-  renderCircNovoSelects();
-  renderCircAtivos();
-  renderCircHistorico();
-}
-
-function renderCircNovoSelects(){
-  const selU = document.getElementById('circUsuario');
-  const selL = document.getElementById('circLivro');
-  if(!selU || !selL) return;
-  selU.innerHTML = DB.users.length
-    ? DB.users.map(u=>`<option value="${u.id}">${escapeHTML(u.nome)} (${escapeHTML(u.email)})</option>`).join('')
-    : '<option value="">Nenhum leitor cadastrado ainda</option>';
-  const disponiveis = DB.books.filter(b=>b.estoqueDisp > 0);
-  selL.innerHTML = disponiveis.length
-    ? disponiveis.map(b=>`<option value="${b.id}">${escapeHTML(b.titulo)} (${b.estoqueDisp} disp.)</option>`).join('')
-    : '<option value="">Nenhum livro disponível no momento</option>';
-}
-
-document.getElementById('circRegistrarBtn').onclick = ()=>{
-  const userId = document.getElementById('circUsuario').value;
-  const bookId = document.getElementById('circLivro').value;
-  if(!userId || !bookId){ showToast('Selecione um leitor e um livro disponível.'); return; }
-  const book = DB.books.find(b=>b.id===bookId);
-  if(!book || book.estoqueDisp<=0){ showToast('Este livro não está mais disponível.'); return; }
-  book.estoqueDisp -= 1;
-  const agora = new Date();
-  const prazoDias = DB.settings.prazoDias || 14;
-  const prazo = new Date(agora.getTime() + prazoDias*24*60*60*1000);
-  addTransaction('emprestimo', bookId, userId);
-  DB.loans.push({id:'l'+Date.now()+Math.random().toString(16).slice(2), bookId, userId, status:'ativo', data:agora.toISOString(), prazo:prazo.toISOString(), dataDevolucao:null, multa:0});
-  saveDB();
-  showToast('Empréstimo registrado pelo balcão.');
-  renderAdmin();
-  renderGrid();
-  renderShelf();
-  renderLoans();
-};
-
-function renderCircAtivos(){
-  const termo = normalize(document.getElementById('circAtivosSearch') ? document.getElementById('circAtivosSearch').value : '');
-  const agora = new Date();
-  let ativos = DB.loans.filter(l=>l.status==='ativo');
-  if(termo){
-    ativos = ativos.filter(l=>{
-      const book = DB.books.find(b=>b.id===l.bookId);
-      const user = DB.users.find(u=>u.id===l.userId);
-      const hay = normalize((book?book.titulo:'') + ' ' + (user?user.nome:'') + ' ' + (user?user.email:''));
-      return hay.includes(termo);
-    });
-  }
-  const box = document.getElementById('circAtivosList');
-  if(!ativos.length){
-    box.innerHTML = '<div class="empty">Nenhum empréstimo ativo encontrado.</div>';
-    return;
-  }
-  box.innerHTML = ativos.slice().reverse().map(l=>{
-    const book = DB.books.find(b=>b.id===l.bookId);
-    const user = DB.users.find(u=>u.id===l.userId);
-    const prazo = l.prazo ? new Date(l.prazo) : null;
-    const atrasado = prazo && agora > prazo;
-    const diasAtraso = atrasado ? Math.ceil((agora - prazo) / 86400000) : 0;
-    const multaEstimada = diasAtraso * (DB.settings.multaPorDia||0);
-    return `
-    <div class="loan-item">
-      <div>
-        <strong>${book?escapeHTML(book.titulo):'(livro removido)'}</strong><br>
-        <small style="color:var(--ink-soft);">leitor: ${user?escapeHTML(user.nome):'—'} · emprestado em ${fmtData(l.data)}${prazo?' · prazo '+fmtDataCurta(prazo):''}</small>
-        ${atrasado ? `<br><span class="tag atrasado">atrasado há ${diasAtraso} dia(s)</span> <span class="multa-badge">multa estimada: ${fmtMoeda(multaEstimada)}</span>` : `<br><span class="tag ativo">em dia</span>`}
-      </div>
-      <div style="display:flex; flex-direction:column; align-items:flex-end; gap:6px;">
-        <div class="abono-row">
-          <label><input type="checkbox" data-abono="${l.id}"> Abonar multa</label>
-        </div>
-        <div class="row-actions">
-          <button data-renovar="${l.id}">Renovar</button>
-          <button data-devolver-admin="${l.id}">Devolver</button>
-        </div>
-      </div>
-    </div>`;
-  }).join('');
-}
-
-function renovarEmprestimoAdmin(loanId){
-  const loan = DB.loans.find(l=>l.id===loanId);
-  if(!loan || loan.status!=='ativo') return;
-  const prazoDias = DB.settings.prazoDias || 14;
-  const base = new Date();
-  loan.prazo = new Date(base.getTime() + prazoDias*24*60*60*1000).toISOString();
-  saveDB();
-  showToast('Empréstimo renovado por mais ' + prazoDias + ' dia(s).');
-  renderCircAtivos();
-  renderLoans();
-}
-
-function devolverLivroAdminComAbono(loanId, abonar){
-  const loan = DB.loans.find(l=>l.id===loanId);
-  if(!loan || loan.status!=='ativo') return;
-  const agora = new Date();
-  const prazo = loan.prazo ? new Date(loan.prazo) : agora;
-  const diasAtraso = Math.max(0, Math.ceil((agora - prazo) / 86400000));
-  const multa = abonar ? 0 : diasAtraso * (DB.settings.multaPorDia||0);
-  loan.status = 'devolvido';
-  loan.dataDevolucao = agora.toISOString();
-  loan.multa = multa;
-  const book = DB.books.find(b=>b.id===loan.bookId);
-  if(book) book.estoqueDisp = Math.min(book.estoqueTotal, book.estoqueDisp+1);
-  addTransaction('devolucao', loan.bookId, loan.userId, multa);
-  saveDB();
-  showToast(abonar ? 'Livro devolvido. Multa abonada pelo bibliotecário.' : (multa>0 ? `Livro devolvido. Multa por atraso: ${fmtMoeda(multa)}.` : 'Livro devolvido. Obrigado!'));
-  renderAdmin();
-  renderGrid();
-  renderShelf();
-  renderLoans();
-}
-
-document.getElementById('circAtivosList').addEventListener('click', e=>{
-  const renovarBtn = e.target.closest('[data-renovar]');
-  if(renovarBtn){ renovarEmprestimoAdmin(renovarBtn.dataset.renovar); return; }
-  const devBtn = e.target.closest('[data-devolver-admin]');
-  if(devBtn){
-    const loanId = devBtn.dataset.devolverAdmin;
-    const checkbox = document.querySelector(`[data-abono="${loanId}"]`);
-    const abonar = checkbox ? checkbox.checked : false;
-    devolverLivroAdminComAbono(loanId, abonar);
-  }
-});
-
-document.getElementById('circAtivosSearch').addEventListener('input', renderCircAtivos);
-
-function renderCircHistorico(){
-  const termo = normalize(document.getElementById('circHistoricoSearch') ? document.getElementById('circHistoricoSearch').value : '');
-  let lista = DB.transactions;
-  if(termo){
-    lista = lista.filter(t=>{
-      const book = DB.books.find(b=>b.id===t.bookId);
-      const user = DB.users.find(u=>u.id===t.userId);
-      const hay = normalize((book?book.titulo:'') + ' ' + (user?user.nome:''));
-      return hay.includes(termo);
-    });
-  }
-  document.getElementById('transBody').innerHTML = lista.slice(0,80).map(t=>{
+  document.getElementById('transBody').innerHTML = DB.transactions.slice(0,50).map(t=>{
     const book = DB.books.find(b=>b.id===t.bookId);
     const user = DB.users.find(u=>u.id===t.userId);
     const label = {emprestimo:'Empréstimo', devolucao:'Devolução'}[t.tipo] || t.tipo;
     return `<tr><td>${fmtData(t.data)}</td><td>${label}</td><td>${book?escapeHTML(book.titulo):'—'}</td><td>${user?escapeHTML(user.nome):'—'}</td><td>${t.multa ? fmtMoeda(t.multa) : '—'}</td></tr>`;
   }).join('') || `<tr><td colspan="5" class="empty">Nenhuma movimentação registrada ainda.</td></tr>`;
+
+  document.getElementById('cfgPrazo').value = DB.settings.prazoDias;
+  document.getElementById('cfgMulta').value = DB.settings.multaPorDia;
+
+  renderDashboardCharts();
 }
-document.getElementById('circHistoricoSearch').addEventListener('input', renderCircHistorico);
-
-document.getElementById('circTabs').addEventListener('click', e=>{
-  const btn = e.target.closest('button[data-ctab]');
-  if(!btn) return;
-  document.querySelectorAll('#circTabs button').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  document.querySelectorAll('.circ-panel').forEach(p=>p.classList.remove('show'));
-  document.getElementById('circ-'+btn.dataset.ctab).classList.add('show');
-});
-
-/* ---------------------------------------------------------
-   USUÁRIOS (aba "Usuários" do admin)
-   --------------------------------------------------------- */
-function renderUsuariosTable(){
-  const termo = normalize(document.getElementById('usuariosSearchInput') ? document.getElementById('usuariosSearchInput').value : '');
-  let lista = DB.users;
-  if(termo){
-    lista = lista.filter(u=> normalize(u.nome + ' ' + u.email).includes(termo));
-  }
-  document.getElementById('usuariosBody').innerHTML = lista.length ? lista.map(u=>{
-    const totalEmp = DB.loans.filter(l=>l.userId===u.id).length;
-    const isBib = u.role === 'bibliotecario';
-    return `<tr>
-      <td>${escapeHTML(u.nome)}</td>
-      <td>${escapeHTML(u.email)}</td>
-      <td><span class="role-pill ${isBib?'bibliotecario':''}">${isBib?'Bibliotecário':'Leitor'}</span></td>
-      <td>${totalEmp}</td>
-      <td><div class="row-actions"><button data-toggle-role="${u.id}">Tornar ${isBib?'leitor':'bibliotecário'}</button></div></td>
-    </tr>`;
-  }).join('') : `<tr><td colspan="5" class="empty">Nenhum usuário encontrado.</td></tr>`;
-}
-
-function toggleUserRole(userId){
-  const u = DB.users.find(x=>x.id===userId);
-  if(!u) return;
-  u.role = (u.role==='bibliotecario') ? 'aluno' : 'bibliotecario';
-  saveDB();
-  showToast(`${u.nome} agora é ${u.role==='bibliotecario'?'bibliotecário(a)':'leitor(a)'}.`);
-  renderUsuariosTable();
-}
-
-document.getElementById('usuariosBody').addEventListener('click', e=>{
-  const btn = e.target.closest('[data-toggle-role]');
-  if(btn) toggleUserRole(btn.dataset.toggleRole);
-});
-document.getElementById('usuariosSearchInput').addEventListener('input', renderUsuariosTable);
-
-/* ---------------------------------------------------------
-   BAIXA RÁPIDA (dashboard) — localizar e devolver rapidamente
-   --------------------------------------------------------- */
-function renderBaixaRapida(){
-  const input = document.getElementById('baixaRapidaInput');
-  const box = document.getElementById('baixaRapidaResults');
-  if(!input || !box) return;
-  const termo = normalize(input.value);
-  if(!termo){ box.innerHTML = ''; return; }
-  const agora = new Date();
-  const resultados = DB.loans.filter(l=>{
-    if(l.status!=='ativo') return false;
-    const book = DB.books.find(b=>b.id===l.bookId);
-    const user = DB.users.find(u=>u.id===l.userId);
-    const hay = normalize((book?book.titulo:'') + ' ' + (user?user.nome:''));
-    return hay.includes(termo);
-  });
-  if(!resultados.length){
-    box.innerHTML = '<div class="empty">Nenhum empréstimo ativo corresponde à busca.</div>';
-    return;
-  }
-  box.innerHTML = resultados.slice(0,8).map(l=>{
-    const book = DB.books.find(b=>b.id===l.bookId);
-    const user = DB.users.find(u=>u.id===l.userId);
-    const prazo = l.prazo ? new Date(l.prazo) : null;
-    const atrasado = prazo && agora > prazo;
-    return `<div class="quick-result">
-      <span>${book?escapeHTML(book.titulo):'—'} <small style="color:var(--ink-soft);">(${user?escapeHTML(user.nome):'—'})</small> ${atrasado?'<span class="tag atrasado">atrasado</span>':''}</span>
-      <button class="btn small ghost" data-baixa-devolver="${l.id}">Devolver</button>
-    </div>`;
-  }).join('');
-}
-
-document.getElementById('baixaRapidaInput').addEventListener('input', renderBaixaRapida);
-document.getElementById('baixaRapidaResults').addEventListener('click', e=>{
-  const btn = e.target.closest('[data-baixa-devolver]');
-  if(btn){
-    devolverLivroAdminComAbono(btn.dataset.baixaDevolver, false);
-    renderBaixaRapida();
-  }
-});
-
-/* ---------------------------------------------------------
-   EXPORTAÇÃO CSV
-   --------------------------------------------------------- */
-function downloadCSV(filename, headers, rows){
-  const escapeCsv = v=>{
-    const s = (v===undefined||v===null) ? '' : String(v);
-    return '"' + s.replace(/"/g,'""') + '"';
-  };
-  const lines = [headers.map(escapeCsv).join(';')].concat(
-    rows.map(r=> r.map(escapeCsv).join(';'))
-  );
-  const csv = '\uFEFF' + lines.join('\r\n');
-  const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url; a.download = filename;
-  document.body.appendChild(a); a.click(); document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-}
-
-function exportInventarioCsv(){
-  const headers = ['Título','ISBN','Gênero','Total','Disponível','Emprestados'];
-  const rows = DB.books.map(b=>{
-    const emprestados = DB.loans.filter(l=>l.bookId===b.id && l.status==='ativo').length;
-    return [b.titulo, b.isbn||'', b.genero, b.estoqueTotal, b.estoqueDisp, emprestados];
-  });
-  downloadCSV('lumen-inventario.csv', headers, rows);
-  showToast('Inventário exportado.');
-}
-
-function exportAtrasadosCsv(){
-  const agora = new Date();
-  const headers = ['Livro','Leitor','E-mail','Data do empréstimo','Prazo','Dias de atraso','Multa estimada'];
-  const rows = DB.loans.filter(l=>l.status==='ativo' && l.prazo && new Date(l.prazo) < agora).map(l=>{
-    const book = DB.books.find(b=>b.id===l.bookId);
-    const user = DB.users.find(u=>u.id===l.userId);
-    const prazo = new Date(l.prazo);
-    const dias = Math.ceil((agora - prazo)/86400000);
-    return [book?book.titulo:'', user?user.nome:'', user?user.email:'', fmtDataCurta(l.data), fmtDataCurta(prazo), dias, fmtMoeda(dias*(DB.settings.multaPorDia||0))];
-  });
-  downloadCSV('lumen-atrasados.csv', headers, rows);
-  showToast('Lista de atrasados exportada.');
-}
-
-function exportUsuariosCsv(){
-  const headers = ['Nome','E-mail','Perfil','Total de empréstimos'];
-  const rows = DB.users.map(u=>[u.nome, u.email, u.role==='bibliotecario'?'Bibliotecário':'Leitor', DB.loans.filter(l=>l.userId===u.id).length]);
-  downloadCSV('lumen-usuarios.csv', headers, rows);
-  showToast('Lista de usuários exportada.');
-}
-
-function exportHistoricoCsv(){
-  const headers = ['Data','Tipo','Livro','Usuário','Multa'];
-  const rows = DB.transactions.map(t=>{
-    const book = DB.books.find(b=>b.id===t.bookId);
-    const user = DB.users.find(u=>u.id===t.userId);
-    const label = {emprestimo:'Empréstimo', devolucao:'Devolução'}[t.tipo] || t.tipo;
-    return [fmtData(t.data), label, book?book.titulo:'', user?user.nome:'', t.multa?fmtMoeda(t.multa):''];
-  });
-  downloadCSV('lumen-historico.csv', headers, rows);
-  showToast('Histórico exportado.');
-}
-
-document.getElementById('exportInventarioCsv').onclick = exportInventarioCsv;
-document.getElementById('exportAtrasadosCsv').onclick = exportAtrasadosCsv;
-document.getElementById('exportUsuariosCsvDash').onclick = exportUsuariosCsv;
-document.getElementById('exportUsuariosCsv').onclick = exportUsuariosCsv;
-document.getElementById('exportHistoricoCsv').onclick = exportHistoricoCsv;
 
 function renderDashboardCharts(){
   if(typeof Chart === 'undefined') return;
@@ -2637,4 +2122,4 @@ document.getElementById('saveConfigBtn').onclick = ()=>{
 })();
 </script>
 </body>
-</html>
+</html>yyiy
