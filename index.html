@@ -6,7 +6,7 @@
   <title>Lúmen — Biblioteca Escolar</title>
   <!-- Fontes -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Playfair+Display:wght@700;800;900&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Special+Elite&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,800&family=Inter:wght@400;500;600;700;800&family=Special+Elite&display=swap" rel="stylesheet" />
   <!-- Libs -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bcrypt.js/5.0.1/bcrypt.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.0/chart.umd.min.js"></script>
@@ -14,59 +14,70 @@
   <style>
     /* ======================== ESTILOS COMPLETOS ======================== */
     :root {
-      --bg: #EDE1C4;
-      --bg-alt: #E2CFA3;
-      --card: #FBF5E8;
-      --card-rgb: 251,245,232;
-      --card-line: #D8C093;
-      --ink: #2B1B12;
-      --ink-soft: #5A4531;
-      --brown-900: #2B1B12;
-      --brown-800: #43291B;
-      --brown-700: #5C3A24;
-      --brown-600: #78502F;
-      --brown-400: #9C6B3E;
-      --tan: #C79A5C;
-      --accent: #A85328;
-      --accent-dark: #7E3B1A;
-      --gold: #A9822F;
-      --stamp: #8C3B2A;
-      --overdue: #8C3B2A;
-      --shadow: 0 10px 24px rgba(43,27,18,0.18);
-      --radius: 4px;
-      --sidebar-w: 92px;
+      --bg: #F7F1E6;
+      --bg-alt: #EFE4CE;
+      --card: #FFFFFF;
+      --card-rgb: 255,255,255;
+      --card-line: #E4D6BC;
+      --ink: #3B2A1C;
+      --ink-soft: #7A6650;
+      --brown-900: #2C2013;
+      --brown-800: #40301F;
+      --brown-700: #5A4429;
+      --brown-600: #79603C;
+      --brown-400: #A9855A;
+      --tan: #D9C39C;
+      --accent: #8A5B34;
+      --accent-dark: #6A4425;
+      --gold: #B08A52;
+      --stamp: #8A5B34;
+      --overdue: #A24A3A;
+      --success: #3F7A3A;
+      --spine-ink: #F7F1E6;
+      --shadow: 0 10px 26px rgba(59,42,28,.12);
+      --shadow-strong: 0 16px 34px rgba(59,42,28,.18);
+      --radius: 10px;
+      --sidebar-w: 88px;
       --heading: var(--brown-900);
-      --bg-glow: rgba(255,255,255,0.25);
+      --bg-glow: rgba(255,255,255,.4);
       --input-bg: #FFFFFF;
+      --focus-ring: 0 0 0 3px rgba(138,91,52,.25);
+      --admin-row-hover: rgba(138,91,52,.08);
+      --motion-book: .42s cubic-bezier(.22,.75,.25,1);
+      --motion-fast: .18s ease;
     }
     [data-theme="dark"] {
-      --bg: #120D08;
-      --bg-alt: #1B140D;
-      --card: #1E1710;
-      --card-rgb: 30,23,16;
-      --card-line: #3A2C1C;
-      --ink: #F1E4C9;
-      --ink-soft: #C7B48D;
-      --brown-900: #0C0906;
-      --brown-800: #17110B;
-      --brown-700: #2A1E13;
-      --brown-600: #4A331E;
-      --brown-400: #8A6338;
-      --tan: #D9A441;
-      --accent: #E8A33D;
-      --accent-dark: #C97F22;
-      --gold: #E3B155;
-      --stamp: #D98A5C;
-      --overdue: #E08B6B;
-      --shadow: 0 14px 34px rgba(0,0,0,0.55);
-      --heading: #F6EAD0;
-      --bg-glow: rgba(232,163,61,0.10);
-      --input-bg: #241B12;
+      --bg: #17120C;
+      --bg-alt: #1F1810;
+      --card: #241C13;
+      --card-rgb: 36,28,19;
+      --card-line: #3B2E1E;
+      --ink: #F1E6D3;
+      --ink-soft: #C3AF90;
+      --brown-900: #0E0B07;
+      --brown-800: #1B140D;
+      --brown-700: #2C2114;
+      --brown-600: #4A3A24;
+      --brown-400: #8A6C42;
+      --tan: #D9BE8C;
+      --accent: #D9A867;
+      --accent-dark: #B5854A;
+      --gold: #E1C48B;
+      --stamp: #D9A867;
+      --overdue: #E29277;
+      --success: #9BC58D;
+      --spine-ink: #F1E6D3;
+      --shadow: 0 16px 34px rgba(0,0,0,.5);
+      --shadow-strong: 0 22px 44px rgba(0,0,0,.62);
+      --heading: #F6ECD9;
+      --bg-glow: rgba(217,168,103,.08);
+      --input-bg: #2C2114;
     }
     html {
-      font-size: 18px;
+      font-size: 16px;
       background: var(--bg);
-      transition: background 0.25s ease;
+      scroll-behavior: smooth;
+      transition: background .25s ease;
     }
     * {
       box-sizing: border-box;
@@ -78,13 +89,16 @@
     }
     body {
       background:
-        radial-gradient(1200px 500px at 10% -10%, var(--bg-glow), transparent),
+        radial-gradient(1200px 500px at 90% -10%, var(--bg-glow), transparent),
         var(--bg);
       color: var(--ink);
-      font-family: 'Lora', serif;
+      font-family: 'Inter', sans-serif;
       line-height: 1.6;
       min-height: 100vh;
-      transition: background 0.3s ease, color 0.3s ease;
+      transition: background .3s ease, color .3s ease;
+    }
+    body.modal-open {
+      overflow: hidden;
     }
     a {
       color: inherit;
@@ -93,25 +107,32 @@
     h2,
     h3,
     h4 {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Fraunces', serif;
       margin: 0;
       color: var(--heading);
+      font-weight: 700;
+      letter-spacing: -.01em;
     }
     .eyebrow {
-      font-family: 'Special Elite', monospace;
-      letter-spacing: .14em;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      letter-spacing: .12em;
       text-transform: uppercase;
-      font-size: .75rem;
+      font-size: .72rem;
       color: var(--accent-dark);
     }
     button {
-      font-family: 'Lora', serif;
+      font-family: 'Inter', sans-serif;
       cursor: pointer;
+    }
+    :where(button, a, input, select, textarea, [tabindex]):focus-visible {
+      outline: none;
+      box-shadow: var(--focus-ring);
     }
     input,
     select,
     textarea {
-      font-family: 'Lora', serif;
+      font-family: 'Inter', sans-serif;
     }
 
     /* ---------- SIDEBAR ---------- */
@@ -146,17 +167,19 @@
       border: 2px solid #8A7148;
     }
     .sidebar-brand img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      display: block;
-    }
+       width: 100%;
+       height: 100%;
+       object-fit: cover;
+       display: block;
+     }
     .sidebar-nav {
       display: flex;
       flex-direction: column;
       gap: 6px;
       margin-top: 26px;
       width: 100%;
+      overflow-y: auto;
+      scrollbar-width: thin;
     }
     .sidebar-link {
       display: flex;
@@ -168,7 +191,7 @@
       color: #CBB588;
       text-decoration: none;
       font-size: .7rem;
-      font-family: 'Special Elite';
+      font-family: 'Inter', sans-serif;
       letter-spacing: .02em;
       text-align: center;
       background: none;
@@ -202,8 +225,8 @@
       gap: 12px;
     }
     .theme-toggle {
-      width: 64px;
-      height: 52px;
+      width: 60px;
+      height: 48px;
       border-radius: 12px;
       border: 1.5px solid #6E5A3D;
       background: rgba(0, 0, 0, .15);
@@ -212,20 +235,38 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 2px;
+      gap: 1px;
       cursor: pointer;
+      transition: color var(--motion-fast), border-color var(--motion-fast), background var(--motion-fast), transform var(--motion-fast);
     }
     .theme-toggle:hover {
       border-color: var(--tan);
       color: var(--tan);
+      background: rgba(217,195,156,.12);
+      transform: translateY(-1px);
     }
-    .theme-toggle svg {
-      width: 17px;
-      height: 17px;
+    .theme-toggle:active {
+      transform: translateY(0);
+    }
+    .theme-symbol {
+      display: block;
+      width: 20px;
+      height: 20px;
+      font-family: 'Inter', sans-serif;
+      font-size: 1.15rem;
+      line-height: 20px;
+      text-align: center;
+    }
+    .theme-symbol.sun {
+      color: #F2B84B;
+    }
+    .theme-symbol.moon {
+      color: var(--tan);
     }
     .theme-toggle-label {
-      font-family: 'Special Elite';
+      font-family: 'Inter', sans-serif;
       font-size: .55rem;
+      font-weight: 700;
       letter-spacing: .03em;
       text-transform: uppercase;
     }
@@ -278,17 +319,17 @@
       cursor: default;
     }
     .brand-logo-sm {
-      width: 50px;
-      height: 50px;
-      border-radius: 13px;
-      object-fit: contain;
+       width: 50px;
+       height: 50px;
+       border-radius: 13px;
+       object-fit: cover;
       border: 1.5px solid #6E5A3D;
       transition: filter .3s ease;
     }
     .brand-name {
-      font-family: 'Outfit', sans-serif;
-      font-weight: 700;
-      font-size: 1.6rem;
+      font-family: 'Fraunces', serif;
+      font-weight: 800;
+      font-size: 1.4rem;
       color: var(--tan);
       letter-spacing: -.02em;
       line-height: 1;
@@ -378,11 +419,39 @@
     .notif-panel.show {
       display: block;
     }
+    .notif-panel-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 2px 4px 8px;
+      border-bottom: 1px dashed var(--card-line);
+    }
+    .notif-panel-head .btn {
+      padding: 4px 7px;
+      font-size: .68rem;
+    }
     .notif-item {
+      width: 100%;
+      text-align: left;
+      font-family: 'Inter', sans-serif;
       font-size: .9rem;
       padding: 8px 6px;
+      border: none;
       border-bottom: 1px dashed var(--card-line);
       color: var(--ink-soft);
+      background: transparent;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .notif-item:hover,
+    .notif-item.unread {
+      background: rgba(168,83,40,.08);
+    }
+    .notif-item small {
+      color: var(--ink-soft);
+      font-size: .72rem;
     }
     .notif-item:last-child {
       border-bottom: none;
@@ -451,7 +520,7 @@
       font-size: .65rem;
     }
     .librarian-note p {
-      font-family: 'Playfair Display';
+      font-family: 'Fraunces', serif;
       font-style: italic;
       font-size: 1rem;
       color: var(--heading);
@@ -463,64 +532,58 @@
       font-size: .75rem;
     }
     .btn {
+      min-height: 42px;
       padding: 12px 22px;
-      border-radius: 5px;
-      border: 1px solid #3A2313;
-      font-size: 1rem;
-      font-weight: 600;
+      border-radius: 6px;
+      border: 1px solid var(--brown-900);
+      font-family: 'Inter', sans-serif;
+      font-size: .9rem;
+      font-weight: 700;
       background: linear-gradient(90deg,
-          #3A2313 0%,
-          #5C3A24 14%,
-          #C79A5C 32%,
-          #F3E8D2 50%,
-          #C79A5C 68%,
-          #5C3A24 86%,
-          #3A2313 100%);
+        var(--brown-900) 0%, var(--brown-600) 18%, var(--tan) 38%, #FFFFFF 50%,
+        var(--tan) 62%, var(--brown-600) 82%, var(--brown-900) 100%);
       background-size: 180% 100%;
       background-position: 50% 0;
-      color: #3A2313;
-      letter-spacing: .02em;
-      text-shadow: 0 1px 0 rgba(255, 255, 255, .25);
+      color: var(--brown-900);
+      letter-spacing: .01em;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 3px 8px rgba(0, 0, 0, .28), inset 0 1px 0 rgba(255, 255, 255, .3);
-      transition: transform .18s ease, box-shadow .18s ease, filter .18s ease, background-position .35s ease;
+      box-shadow: 0 3px 8px rgba(59,42,28,.18), inset 0 1px 0 rgba(255,255,255,.4);
+      transition: transform var(--motion-fast), box-shadow var(--motion-fast), filter var(--motion-fast), background-position .35s ease;
     }
     .btn:hover {
-      filter: brightness(1.06);
+      filter: brightness(1.04);
       transform: translateY(-2px);
-      background-position: 32% 0;
-      box-shadow: 0 9px 16px rgba(0, 0, 0, .32), inset 0 1px 0 rgba(255, 255, 255, .35);
+      background-position: 30% 0;
+      box-shadow: 0 9px 16px rgba(59,42,28,.24), inset 0 1px 0 rgba(255,255,255,.5);
     }
     .btn:active {
-      transform: translateY(0) scale(.97);
-      filter: brightness(.95);
-      box-shadow: 0 2px 4px rgba(0, 0, 0, .3), inset 0 1px 0 rgba(255, 255, 255, .2);
+      transform: translateY(0) scale(.98);
+      filter: brightness(.96);
     }
     .btn.ghost {
       background: transparent;
-      border: 1.5px solid #8A6A47;
+      border: 1.5px solid var(--brown-600);
       color: var(--heading);
-      text-shadow: none;
       box-shadow: none;
     }
     .btn.ghost:hover {
-      background: linear-gradient(90deg, #3A2313 0%, #C79A5C 50%, #3A2313 100%);
-      color: #2B1B12;
-      text-shadow: 0 1px 0 rgba(255, 255, 255, .3);
+      background: linear-gradient(90deg, var(--brown-900) 0%, var(--tan) 50%, var(--brown-900) 100%);
+      color: #fff;
       border-color: transparent;
       transform: translateY(-2px);
-      box-shadow: 0 7px 14px rgba(0, 0, 0, .28);
+      box-shadow: 0 7px 14px rgba(59,42,28,.22);
     }
     .btn.ghost:active {
-      transform: translateY(0) scale(.97);
+      transform: translateY(0) scale(.98);
     }
     .btn.small {
+      min-height: 32px;
       padding: 8px 14px;
-      font-size: .85rem;
-      border-radius: 4px;
+      font-size: .76rem;
+      border-radius: 5px;
     }
     .btn:disabled {
       opacity: .45;
@@ -528,6 +591,24 @@
       transform: none !important;
       filter: none !important;
       box-shadow: none !important;
+    }
+    .btn-devolver {
+      min-height: 32px;
+      padding: 8px 14px;
+      border: 1px solid var(--brown-900);
+      border-radius: 5px;
+      background: var(--brown-900);
+      color: #F3E8D2;
+      font-family: 'Inter', sans-serif;
+      font-size: .76rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform var(--motion-fast), background var(--motion-fast), box-shadow var(--motion-fast);
+    }
+    .btn-devolver:hover {
+      background: var(--accent-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 5px 10px rgba(59,42,28,.18);
     }
     /* Entrar branco no tema claro */
     [data-theme="light"] #authArea .btn.ghost {
@@ -539,10 +620,11 @@
 
     .shelf {
       background: linear-gradient(180deg, var(--brown-700), var(--brown-800));
-      border-radius: 6px;
+      border-radius: 10px;
       padding: 20px 20px 0;
-      box-shadow: var(--shadow);
+      box-shadow: var(--shadow-strong);
       position: relative;
+      overflow: hidden;
     }
     .shelf-row {
       display: flex;
@@ -556,43 +638,48 @@
     .shelf-plank {
       height: 13px;
       margin: 0 -20px;
-      background: linear-gradient(180deg, var(--brown-900), #1B1108);
-      box-shadow: 0 3px 5px rgba(0, 0, 0, .32) inset, 0 2px 4px rgba(0, 0, 0, .35);
+      background: linear-gradient(180deg, var(--brown-900), #150E08);
+      box-shadow: 0 3px 5px rgba(0,0,0,.3) inset, 0 2px 4px rgba(0,0,0,.32);
     }
     .spine {
       flex: 0 0 auto;
+      min-width: 28px;
       border-radius: 3px 3px 0 0;
       display: flex;
       align-items: flex-end;
       justify-content: center;
-      padding-bottom: 9px;
+      padding: 0 4px 9px;
+      color: var(--spine-ink);
       cursor: pointer;
       transform-origin: bottom center;
-      box-shadow: inset -3px 0 6px rgba(0, 0, 0, .18), inset 3px 0 6px rgba(255, 255, 255, .10);
-      transition: filter .15s, box-shadow .15s, transform .15s;
+      box-shadow: inset -3px 0 6px rgba(0,0,0,.16), inset 3px 0 6px rgba(255,255,255,.08);
+      transition: filter var(--motion-fast), box-shadow var(--motion-fast), transform var(--motion-fast);
     }
-    .spine:hover {
-      filter: brightness(1.14);
-      box-shadow: inset -3px 0 6px rgba(0, 0, 0, .18), inset 3px 0 6px rgba(255, 255, 255, .10), 0 8px 12px rgba(0, 0, 0, .28);
+    .spine:hover,
+    .spine:focus-visible {
+      filter: brightness(1.12);
+      transform: translateY(-3px);
+      box-shadow: inset -3px 0 6px rgba(0,0,0,.16), inset 3px 0 6px rgba(255,255,255,.08), 0 8px 12px rgba(0,0,0,.24);
     }
     .spine span {
       writing-mode: vertical-rl;
       text-orientation: mixed;
-      font-family: 'Special Elite';
-      font-size: .75rem;
+      font-family: 'Inter', sans-serif;
+      font-size: .68rem;
       font-weight: 700;
+      line-height: 1.1;
       letter-spacing: .03em;
       max-height: 94%;
       overflow: hidden;
       white-space: nowrap;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, .55), 0 0 1px rgba(0, 0, 0, .4);
+      text-shadow: 0 1px 2px rgba(0,0,0,.5);
     }
     .shelf-caption {
       text-align: center;
-      color: #EADFC5;
-      font-family: 'Playfair Display', serif;
+      color: #EFE1C4;
+      font-family: 'Fraunces', serif;
       font-style: italic;
-      font-size: 1rem;
+      font-size: .92rem;
       padding: 12px 0 4px;
       letter-spacing: .02em;
     }
@@ -639,19 +726,28 @@
       margin-bottom: 22px;
     }
     .filters button {
-      background: transparent;
+      min-height: 34px;
+      background: var(--card);
       border: 1px solid var(--card-line);
       color: var(--ink-soft);
       padding: 6px 14px;
       border-radius: 20px;
-      font-size: .9rem;
-      transition: background .15s, color .15s, border-color .15s;
+      font-family: 'Inter', sans-serif;
+      font-size: .82rem;
+      font-weight: 600;
+      transition: background var(--motion-fast), color var(--motion-fast), border-color var(--motion-fast), transform var(--motion-fast);
+    }
+    .filters button:hover,
+    .filters button:focus-visible {
+      border-color: var(--accent);
+      color: var(--accent-dark);
+      transform: translateY(-1px);
     }
     .filters button.active {
       background: var(--accent);
-      color: var(--brown-900);
+      color: #fff;
       border-color: var(--accent);
-      font-weight: 600;
+      font-weight: 700;
     }
     .filter-sort {
       display: flex;
@@ -662,12 +758,14 @@
     }
     .filter-sort select,
     .filter-sort input {
-      padding: 6px 10px;
+      min-height: 34px;
+      padding: 7px 10px;
       border: 1px solid var(--card-line);
-      border-radius: 4px;
+      border-radius: 6px;
       background: var(--card);
       color: var(--ink);
-      font-size: .9rem;
+      font-family: 'Inter', sans-serif;
+      font-size: .85rem;
     }
 
     .grid,
@@ -701,18 +799,30 @@
 
     /* ---------- LIVRO (card) ---------- */
     .book-card {
-      position: relative;
-      width: 100%;
-    }
-    .book-stage {
-      perspective: 1300px;
-    }
-    .book {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 2/3;
-      cursor: pointer;
-    }
+       position: relative;
+       width: 100%;
+       isolation: isolate;
+       opacity: 0;
+       transform: translateY(12px);
+       animation: bookCardIn .5s var(--motion-book) forwards;
+       animation-delay: var(--book-delay, 0ms);
+     }
+     @keyframes bookCardIn {
+       from { opacity: 0; transform: translateY(12px); }
+       to { opacity: 1; transform: translateY(0); }
+     }
+     .book-stage {
+       perspective: 1300px;
+       position: relative;
+     }
+     .book {
+       position: relative;
+       width: 100%;
+       aspect-ratio: 2/3;
+       cursor: pointer;
+       transform-style: preserve-3d;
+       transition: transform var(--motion-book), filter var(--motion-fast);
+     }
     .book-cover {
       position: absolute;
       inset: 0;
@@ -720,18 +830,76 @@
       overflow: hidden;
       border-radius: 2px 7px 7px 2px;
       background: var(--card);
-      box-shadow: 0 6px 14px rgba(43, 27, 18, .22), inset -3px 0 0 rgba(0, 0, 0, .16);
+      border: 1px solid var(--card-line);
+      box-shadow: 0 6px 14px rgba(59,42,28,.18), inset -3px 0 0 rgba(0,0,0,.12);
       transform-origin: left center;
-      transition: transform .3s cubic-bezier(.4, 0, .2, 1), box-shadow .3s ease;
+      transition: transform .3s cubic-bezier(.4,0,.2,1), box-shadow .3s ease;
     }
     .book-cover img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      display: block;
-      background: var(--card);
-    }
+       width: 100%;
+       height: 100%;
+       object-fit: cover;
+       object-position: center;
+       display: block;
+       background: var(--card);
+       transition: transform var(--motion-book), filter var(--motion-book);
+     }
+     .book-cover::after {
+       content: '';
+       position: absolute;
+       inset: 0;
+       pointer-events: none;
+       background: linear-gradient(115deg, rgba(255,255,255,.18), transparent 34%, rgba(0,0,0,.16));
+       opacity: .45;
+       transition: opacity var(--motion-fast);
+     }
+     .book-hover-info {
+       position: absolute;
+       z-index: 8;
+       left: 8px;
+       right: 8px;
+       bottom: 8px;
+       padding: 10px 11px;
+       border: 1px solid var(--card-line);
+       border-radius: 6px;
+       background: rgba(var(--card-rgb), .96);
+       box-shadow: var(--shadow-strong);
+       color: var(--ink);
+       opacity: 0;
+       transform: translateY(8px);
+       pointer-events: none;
+       transition: opacity var(--motion-fast), transform var(--motion-book);
+     }
+     .book-hover-info strong {
+       display: block;
+       font-family: 'Fraunces', serif;
+       font-size: .84rem;
+       line-height: 1.15;
+     }
+     .book-hover-info p {
+       margin: 4px 0 8px;
+       color: var(--ink-soft);
+       font-family: 'Inter', sans-serif;
+       font-size: .7rem;
+       line-height: 1.25;
+       display: -webkit-box;
+       -webkit-box-orient: vertical;
+       -webkit-line-clamp: 3;
+       overflow: hidden;
+     }
+      .book-hover-info .hover-meta {
+        color: var(--ink-soft);
+        font-family: 'Inter', sans-serif;
+        font-size: .62rem;
+        line-height: 1.35;
+        letter-spacing: .01em;
+      }
+      .book-hover-info .btn {
+       width: 100%;
+       padding: 6px 8px;
+       margin-top: 8px;
+       font-size: .72rem;
+     }
     .book-spine-edge {
       position: absolute;
       left: 0;
@@ -742,21 +910,22 @@
       z-index: 4;
       pointer-events: none;
     }
-    .book-stamp {
-      position: absolute;
-      top: 6px;
-      right: 6px;
-      z-index: 5;
-      font-family: 'Special Elite';
-      font-size: .6rem;
-      letter-spacing: .04em;
-      padding: 2px 5px;
-      border-radius: 3px;
-      border: 1.5px solid var(--stamp);
-      color: var(--stamp);
-      background: rgba(251, 245, 232, .92);
-      transform: rotate(6deg);
-    }
+     .book-stamp {
+       position: absolute;
+       top: 6px;
+       right: 6px;
+       z-index: 5;
+       font-family: 'Inter', sans-serif;
+       font-size: .6rem;
+       font-weight: 700;
+       letter-spacing: .04em;
+       padding: 2px 5px;
+       border-radius: 3px;
+       border: 1.5px solid var(--stamp);
+       color: var(--stamp);
+       background: rgba(var(--card-rgb), .92);
+       transform: rotate(6deg);
+     }
     .book-stamp.out {
       color: #6b6b6b;
       border-color: #6b6b6b;
@@ -814,11 +983,48 @@
       color: var(--stamp);
     }
     @media (hover:hover) {
-      .book:hover .book-cover {
-        transform: translateY(-6px);
-        box-shadow: 0 16px 26px rgba(43, 27, 18, .34);
-      }
-    }
+       .book-card:hover,
+       .book-card:focus-within {
+         z-index: 12;
+       }
+       .book:hover,
+       .book:focus-visible {
+         transform: translateY(-7px) rotateX(1deg) scale(1.025);
+         filter: drop-shadow(0 16px 16px rgba(43,27,18,.18));
+       }
+       .book:hover .book-cover,
+       .book:focus-visible .book-cover {
+         transform: rotateY(-7deg);
+         box-shadow: 14px 12px 24px rgba(43, 27, 18, .32), inset -3px 0 0 rgba(0, 0, 0, .16);
+       }
+       .book:hover .book-cover img,
+       .book:focus-visible .book-cover img {
+         transform: scale(1.035);
+         filter: saturate(1.08) contrast(1.03);
+       }
+       .book:hover .book-cover::after,
+       .book:focus-visible .book-cover::after {
+         opacity: .8;
+       }
+       .book:hover .book-hover-info,
+       .book:focus-visible .book-hover-info {
+         opacity: 1;
+         transform: translateY(0);
+         pointer-events: auto;
+       }
+     }
+     @media (prefers-reduced-motion: reduce) {
+       html { scroll-behavior: auto; }
+       .book-card {
+         opacity: 1;
+         transform: none;
+         animation: none;
+       }
+       .book,
+       .book-cover,
+       .book-cover img,
+       .book-hover-info { transition: none !important; }
+     }
 
     /* ---------- ALUGUÉIS ---------- */
     section.loans {
@@ -1185,7 +1391,7 @@
       display: flex;
       align-items: center;
       gap: 6px;
-      font-family: 'Lora', serif;
+      font-family: 'Inter', sans-serif;
     }
     .auth-divider {
       display: flex;
@@ -1235,33 +1441,35 @@
     }
     .admin-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 14px;
-      margin: 18px 0 26px;
+      grid-template-columns: repeat(auto-fit, minmax(112px, 1fr));
+      gap: 8px;
+      margin: 12px 0 16px;
     }
     .stat {
       background: var(--brown-800);
       color: #F3E8D2;
-      border-radius: 6px;
-      padding: 16px;
+      border-radius: 4px;
+      padding: 10px 12px;
+      min-height: 72px;
     }
     .stat .num {
-      font-family: 'Playfair Display';
-      font-size: 2rem;
+      font-family: 'Fraunces', serif;
+      font-size: 1.45rem;
       font-weight: 800;
+      line-height: 1.1;
     }
     .stat .label {
       font-family: 'Special Elite';
-      font-size: .7rem;
-      letter-spacing: .05em;
+      font-size: .63rem;
+      letter-spacing: .04em;
       color: #D8BE8E;
-      margin-top: 2px;
+      margin-top: 5px;
     }
     .admin-tabs {
       display: flex;
-      gap: 6px;
+      gap: 4px;
       flex-wrap: wrap;
-      margin-bottom: 16px;
+      margin-bottom: 8px;
       border-bottom: 1px solid var(--card-line);
     }
     .admin-tabs button {
@@ -1276,6 +1484,53 @@
       color: var(--accent-dark);
       border-color: var(--accent);
       font-weight: 600;
+    }
+    .admin-groups {
+      gap: 2px;
+      margin-bottom: 0;
+    }
+    .admin-groups button {
+      padding: 8px 12px;
+      font-size: .82rem;
+    }
+    .admin-quick-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 8px 0 12px;
+      border-bottom: 1px solid var(--card-line);
+    }
+    .admin-quick-links button {
+      border: 1px solid var(--card-line);
+      border-radius: 3px;
+      padding: 6px 10px;
+      color: var(--ink-soft);
+      background: transparent;
+      font-family: 'Special Elite', monospace;
+      font-size: .68rem;
+      cursor: pointer;
+    }
+    .admin-quick-links button:hover,
+    .admin-quick-links button.active {
+      border-color: var(--accent);
+      color: var(--accent-dark);
+      background: rgba(168,83,40,.07);
+    }
+    .admin-details {
+      border-top: 1px solid var(--card-line);
+      border-bottom: 1px solid var(--card-line);
+      padding: 9px 0;
+    }
+    .admin-details summary {
+      cursor: pointer;
+      color: var(--ink-soft);
+      font-family: 'Special Elite', monospace;
+      font-size: .75rem;
+      letter-spacing: .04em;
+    }
+    .admin-details[open] summary {
+      color: var(--accent-dark);
+      margin-bottom: 12px;
     }
     .admin-panel {
       display: none;
@@ -1367,10 +1622,219 @@
       background: var(--brown-700);
     }
     .capa-status {
-      font-size: .85rem;
-      color: var(--ink-soft);
-      margin-top: 6px;
-    }
+       font-size: .85rem;
+       color: var(--ink-soft);
+       margin-top: 6px;
+     }
+     .admin-demo-note {
+       padding: 9px 12px;
+       margin: 0 0 14px;
+       border-left: 3px solid var(--accent);
+       background: rgba(var(--card-rgb), .58);
+       color: var(--ink-soft);
+       font-size: .78rem;
+       line-height: 1.35;
+     }
+     .admin-tabs button[aria-selected="true"] {
+       color: var(--accent-dark);
+     }
+     .admin-panel table tbody tr {
+       transition: background var(--motion-fast);
+     }
+     .admin-panel table tbody tr:hover {
+       background: var(--admin-row-hover);
+     }
+     .admin-panel table td:last-child {
+       white-space: nowrap;
+     }
+     .admin-action-row {
+       display: flex;
+       flex-wrap: wrap;
+       gap: 7px;
+       align-items: center;
+     }
+     .admin-list-card {
+       border: 1px solid var(--card-line);
+       border-radius: 5px;
+       padding: 12px;
+       margin-bottom: 10px;
+       background: rgba(var(--card-rgb), .42);
+     }
+     .admin-list-card.is-overdue {
+       border-left: 3px solid var(--stamp);
+     }
+     .admin-list-card h4 {
+       font-size: .98rem;
+       margin-bottom: 4px;
+     }
+     .admin-list-meta {
+       display: flex;
+       flex-wrap: wrap;
+       gap: 5px 14px;
+       color: var(--ink-soft);
+       font-size: .82rem;
+     }
+     .support-intro {
+       color: var(--ink-soft);
+       margin: 0 0 16px;
+       max-width: 70ch;
+     }
+     .support-status {
+       min-height: 1.4em;
+       margin-top: 8px;
+       color: var(--ink-soft);
+       font-size: .86rem;
+     }
+     .support-history {
+       margin-top: 22px;
+       border-top: 1px dashed var(--card-line);
+     }
+     .support-ticket {
+       padding: 12px 0;
+       border-bottom: 1px dashed var(--card-line);
+     }
+     .support-ticket:last-child {
+       border-bottom: none;
+     }
+     .support-ticket h4 {
+       font-size: .95rem;
+       margin-bottom: 4px;
+     }
+     .support-ticket p {
+       margin: 5px 0;
+       color: var(--ink-soft);
+       font-size: .86rem;
+       white-space: pre-wrap;
+     }
+     .support-ticket-meta {
+       display: flex;
+       flex-wrap: wrap;
+       gap: 6px 12px;
+       color: var(--ink-soft);
+       font-size: .72rem;
+     }
+     .support-admin-toolbar {
+       display: flex;
+       align-items: center;
+       gap: 8px;
+       margin-bottom: 12px;
+       color: var(--ink-soft);
+       font-size: .82rem;
+     }
+      .support-admin-toolbar select,
+      .support-ticket select,
+      .support-ticket textarea {
+        padding: 7px 9px;
+        border: 1px solid var(--card-line);
+        border-radius: 6px;
+        background: var(--card);
+        color: var(--ink);
+        font-family: 'Inter', sans-serif;
+      }
+     .support-ticket textarea {
+       width: 100%;
+       min-height: 60px;
+       resize: vertical;
+       margin-top: 8px;
+     }
+     .support-ticket .support-admin-controls {
+       display: grid;
+       grid-template-columns: 160px 1fr auto;
+       gap: 8px;
+       align-items: start;
+       margin-top: 9px;
+     }
+     .support-ticket .support-admin-controls .btn {
+       white-space: nowrap;
+     }
+     .support-status-tag {
+       display: inline-block;
+       padding: 2px 7px;
+       border: 1px solid var(--card-line);
+       border-radius: 10px;
+       font-family: 'Special Elite', monospace;
+       font-size: .68rem;
+       color: var(--ink-soft);
+     }
+     .cover-editor {
+       border-top: 1px dashed var(--card-line);
+       padding-top: 12px;
+     }
+     .cover-current-row {
+       display: grid;
+       grid-template-columns: 112px 1fr;
+       gap: 12px;
+       align-items: stretch;
+     }
+     .cover-current {
+       display: flex;
+       flex-direction: column;
+       gap: 5px;
+       font-family: 'Special Elite';
+       font-size: .68rem;
+       color: var(--ink-soft);
+     }
+     .cover-current img {
+       width: 100%;
+       aspect-ratio: 2/3;
+       object-fit: cover;
+       border-radius: 3px;
+       border: 1px solid var(--card-line);
+       background: var(--card);
+     }
+     .cover-dropzone {
+       min-height: 128px;
+       border: 1.5px dashed var(--brown-600);
+       border-radius: 4px;
+       padding: 14px;
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       justify-content: center;
+       text-align: center;
+       gap: 4px;
+       color: var(--ink-soft);
+       cursor: pointer;
+       transition: border-color var(--motion-fast), background var(--motion-fast), transform var(--motion-fast);
+     }
+     .cover-dropzone strong {
+       color: var(--heading);
+       font-size: .92rem;
+     }
+     .cover-dropzone span {
+       font-size: .78rem;
+     }
+     .cover-dropzone:hover,
+     .cover-dropzone.is-dragging {
+       border-color: var(--accent);
+       background: rgba(168,83,40,.08);
+       transform: translateY(-1px);
+     }
+     .cover-url-row {
+       display: grid;
+       grid-template-columns: 1fr auto;
+       gap: 8px;
+       margin-top: 8px;
+     }
+     .cover-url-row input {
+       min-width: 0;
+     }
+     .cover-actions {
+       display: flex;
+       align-items: center;
+       gap: 10px;
+       flex-wrap: wrap;
+       margin-top: 7px;
+     }
+     .cover-actions .capa-status {
+       margin-top: 0;
+     }
+     .book-cover img,
+     .book-page-left img,
+     #livroSemana img,
+     .mini-grid .book-cover img {
+       background: var(--card);
+     }
 
     @media (max-width: 820px) {
       body {
@@ -1393,13 +1857,15 @@
         width: 38px;
         height: 38px;
       }
-      .sidebar-nav {
-        flex-direction: row;
-        margin-top: 0;
-        margin-left: 8px;
-        gap: 2px;
-        flex: 1;
-      }
+       .sidebar-nav {
+         flex-direction: row;
+         margin-top: 0;
+         margin-left: 8px;
+         gap: 2px;
+         flex: 1;
+         overflow-x: auto;
+         overflow-y: hidden;
+       }
       .sidebar-link {
         font-size: .65rem;
         padding: 6px 2px;
@@ -1407,6 +1873,19 @@
       .sidebar-link svg {
         width: 17px;
         height: 17px;
+      }
+      .shelf-row {
+        overflow-x: auto;
+        overflow-y: hidden;
+        scrollbar-width: thin;
+        scrollbar-color: var(--tan) transparent;
+      }
+      .shelf-row::-webkit-scrollbar {
+        height: 5px;
+      }
+      .shelf-row::-webkit-scrollbar-thumb {
+        background: var(--tan);
+        border-radius: 999px;
       }
       .sidebar-spacer {
         display: none;
@@ -1437,11 +1916,45 @@
         padding: 0 22px;
       }
       .chart-grid {
-        grid-template-columns: 1fr;
-      }
-      .field-2col {
-        grid-template-columns: 1fr;
-      }
+         grid-template-columns: 1fr;
+       }
+       .field-2col {
+         grid-template-columns: 1fr;
+       }
+       .cover-current-row,
+       .cover-url-row {
+         grid-template-columns: 1fr;
+       }
+       .cover-current {
+         max-width: 130px;
+       }
+       .admin-tabs {
+          overflow-x: auto;
+          flex-wrap: nowrap;
+          padding-bottom: 4px;
+        }
+        .admin-tabs button {
+          flex: 0 0 auto;
+        }
+        .admin-quick-links {
+          overflow-x: auto;
+          flex-wrap: nowrap;
+        }
+        .admin-quick-links button {
+          flex: 0 0 auto;
+        }
+        .support-ticket .support-admin-controls {
+          grid-template-columns: 1fr;
+        }
+        .modal.admin-modal {
+         padding: 20px 16px;
+       }
+       .admin-panel {
+         overflow-x: auto;
+       }
+       .admin-panel table {
+         min-width: 620px;
+       }
     }
   </style>
 </head>
@@ -1471,21 +1984,16 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
         <span>Sugestões</span>
       </a>
+      <a href="#suporte" class="sidebar-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8A2.5 2.5 0 0 1 17.5 16H11l-4.5 4v-4h0A2.5 2.5 0 0 1 4 13.5v-8Z"/><path d="M8 8h8M8 11h5"/></svg>
+        <span>Suporte</span>
+      </a>
     </nav>
     <div class="sidebar-spacer"></div>
     <div class="sidebar-bottom">
-      <button class="theme-toggle" id="themeToggleBtn" title="Alternar tema">
-        <svg id="themeIconLit" viewBox="0 0 24 24" style="display:none;">
-          <ellipse cx="12" cy="6" rx="2.6" ry="4" fill="#F2A93B"/>
-          <ellipse cx="12" cy="6.6" rx="1.3" ry="2.3" fill="#FFE3A6"/>
-          <rect x="9.4" y="10.5" width="5.2" height="10.5" rx="1.4" fill="#F5EAD2" stroke="#B58A4A" stroke-width=".6"/>
-          <line x1="12" y1="10.5" x2="12" y2="9" stroke="#3A2313" stroke-width="1"/>
-        </svg>
-        <svg id="themeIconUnlit" viewBox="0 0 24 24">
-          <rect x="9.4" y="8.5" width="5.2" height="12.5" rx="1.4" fill="currentColor" fill-opacity=".18" stroke="currentColor" stroke-width=".9"/>
-          <path d="M12 8.5v-2" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
-          <path d="M10.6 6.7c.6.7 2.2.7 2.8 0" stroke="currentColor" stroke-width=".8" fill="none" stroke-linecap="round" opacity=".6"/>
-        </svg>
+      <button class="theme-toggle" id="themeToggleBtn" type="button" title="Alternar entre tema claro e escuro" aria-label="Alternar entre tema claro e escuro">
+        <span id="themeIconLit" class="theme-symbol sun" aria-hidden="true" style="display:none;">☀</span>
+        <span id="themeIconUnlit" class="theme-symbol moon" aria-hidden="true">☾</span>
         <span class="theme-toggle-label" id="themeToggleLabel">escuro</span>
       </button>
       <button class="dev-dot" id="devTrigger" title="Painel administrativo">
@@ -1558,8 +2066,10 @@
         <option value="za">Z–A</option>
         <option value="popular">Mais populares</option>
         <option value="rating">Melhor avaliados</option>
-        <option value="recent">Mais recentes</option>
-        <option value="mostLoaned">Mais alugados</option>
+         <option value="recent">Mais recentes</option>
+         <option value="oldest">Mais antigos</option>
+         <option value="mostLoaned">Mais alugados</option>
+         <option value="recentlyAdded">Adicionados recentemente</option>
       </select>
       <select id="filterAvailability">
         <option value="all">Todos</option>
@@ -1635,18 +2145,41 @@
     </div>
   </section>
 
+  <!-- ==================== SUPORTE ==================== -->
+  <section class="loans support-section" id="suporte">
+    <p class="eyebrow">Ajuda e suporte</p>
+    <h2 style="font-size:1.4rem; margin-bottom:14px;">Relatar uma dificuldade</h2>
+    <div class="loans-box">
+      <p class="support-intro">Encontrou algo difícil de usar? Conte para a equipe da biblioteca. O relato fica registrado para acompanharmos a solução.</p>
+      <form id="supportForm" novalidate>
+        <div class="field-2col">
+          <div class="field"><label for="supportName">Nome (opcional)</label><input id="supportName" maxlength="80" placeholder="Como podemos chamar você?" /></div>
+          <div class="field"><label for="supportEmail">E-mail (opcional)</label><input id="supportEmail" type="email" maxlength="120" placeholder="voce@escola.com" /></div>
+        </div>
+        <div class="field-2col">
+          <div class="field"><label for="supportCategory">Onde ocorreu?</label><select id="supportCategory"><option value="login">Login ou cadastro</option><option value="catalogo">Catálogo e busca</option><option value="emprestimo">Empréstimo ou devolução</option><option value="reserva">Reserva</option><option value="avaliacao">Avaliação</option><option value="sugestao">Sugestão</option><option value="outro">Outro</option></select></div>
+          <div class="field"><label for="supportPage">Página ou ação (opcional)</label><input id="supportPage" maxlength="120" placeholder="Ex.: abrir um livro" /></div>
+        </div>
+        <div class="field"><label for="supportMessage">O que aconteceu? *</label><textarea id="supportMessage" maxlength="1000" minlength="10" required placeholder="Descreva a dificuldade com o máximo de detalhes possível."></textarea><div class="field-hint">Mínimo de 10 caracteres.</div></div>
+        <button class="btn" id="supportSubmit" type="submit">Enviar relato</button>
+        <div id="supportStatus" class="support-status" role="status" aria-live="polite"></div>
+      </form>
+      <div id="supportList" class="support-history"></div>
+    </div>
+  </section>
+
   <footer class="site">
     <div>Lúmen — biblioteca escolar, aberta todos os dias.</div>
   </footer>
 
   <!-- ==================== MODAL LIVRO ==================== -->
-  <div class="overlay" id="bookOverlay">
-    <div class="modal" id="bookModal"></div>
+      <div class="overlay" id="bookOverlay" role="presentation">
+    <div class="modal" id="bookModal" role="dialog" aria-modal="true" aria-labelledby="bookModalTitle"></div>
   </div>
 
   <!-- ==================== MODAL AUTENTICAÇÃO ==================== -->
-  <div class="overlay" id="authOverlay">
-    <div class="modal">
+  <div class="overlay" id="authOverlay" role="presentation">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="authTitle">
       <button class="close" data-close="authOverlay">×</button>
       <div class="login-box">
         <div class="brand-mark"><img class="logo-icon" alt="Lúmen" /></div>
@@ -1659,8 +2192,8 @@
         <div id="loginFields" style="text-align:left;">
           <div class="field">
             <label>E-mail</label>
-            <input type="email" id="loginEmail" placeholder="seu@gmail.com" autocomplete="username" />
-            <div class="field-hint">Apenas contas @gmail.com são aceitas.</div>
+            <input type="email" id="loginEmail" placeholder="seu@email.com" autocomplete="username" />
+            <div class="field-hint">Use um e-mail válido.</div>
           </div>
           <div class="field">
             <label>Senha</label>
@@ -1684,13 +2217,13 @@
           </div>
           <div class="field">
             <label>E-mail</label>
-            <input type="email" id="signupEmail" placeholder="seu@gmail.com" autocomplete="username" />
-            <div class="field-hint">Apenas contas @gmail.com são aceitas.</div>
+            <input type="email" id="signupEmail" placeholder="seu@email.com" autocomplete="username" />
+            <div class="field-hint">Use um e-mail válido.</div>
           </div>
           <div class="field">
             <label>Senha</label>
             <div class="pw-row">
-              <input type="password" id="signupSenha" placeholder="Crie uma senha (mín. 4 caracteres)" autocomplete="new-password" />
+              <input type="password" id="signupSenha" placeholder="Crie uma senha (mín. 8 caracteres)" autocomplete="new-password" />
               <button type="button" class="pw-toggle" data-pwtoggle="signupSenha">mostrar</button>
             </div>
           </div>
@@ -1704,13 +2237,14 @@
   </div>
 
   <!-- ==================== MODAL LOGIN ADMIN ==================== -->
-  <div class="overlay" id="loginOverlay">
-    <div class="modal">
+  <div class="overlay" id="loginOverlay" role="presentation">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="adminLoginTitle">
       <button class="close" data-close="loginOverlay">×</button>
       <div class="login-box">
         <div class="brand-mark"><img class="logo-icon" alt="Lúmen" /></div>
-        <h2>Painel do administrador</h2>
+         <h2 id="adminLoginTitle">Painel do administrador</h2>
         <p style="color:var(--ink-soft); font-size:.88rem; margin-top:6px;">Acesso restrito à equipe da biblioteca.</p>
+        <p class="admin-demo-note" role="note">Modo demonstração local — a senha DEV não é uma proteção de produção.</p>
         <div class="field" style="text-align:left; margin-top:18px;">
           <label>Senha</label>
           <input type="password" id="adminPass" placeholder="Digite a senha" />
@@ -1722,26 +2256,27 @@
   </div>
 
   <!-- ==================== MODAL ADMIN ==================== -->
-  <div class="overlay" id="adminOverlay">
-    <div class="modal admin-modal">
+  <div class="overlay" id="adminOverlay" role="presentation">
+    <div class="modal admin-modal" role="dialog" aria-modal="true" aria-labelledby="adminModalTitle">
       <button class="close" data-close="adminOverlay">×</button>
       <p class="eyebrow">Área restrita</p>
-      <h2>Painel do administrador — Lúmen</h2>
+       <h2 id="adminModalTitle">Painel do administrador — Lúmen</h2>
       <div class="admin-grid" id="adminStats"></div>
-      <div class="admin-tabs" id="adminTabs">
-        <button data-tab="painel" class="active">Dashboard</button>
-        <button data-tab="estoque">Estoque</button>
-        <button data-tab="usuarios">Usuários</button>
-        <button data-tab="procurados">Mais procurados</button>
-        <button data-tab="avaliacoes">Avaliações</button>
-        <button data-tab="transacoes">Aluguéis</button>
-        <button data-tab="sugestoes">Sugestões</button>
-        <button data-tab="novo">Adicionar livro</button>
-        <button data-tab="config">Configurações</button>
-        <button data-tab="pesquisa">Pesquisa</button>
+      <div class="admin-demo-note" role="note"><strong>Modo demonstração local.</strong> A senha DEV é mantida para esta apresentação e não protege dados em produção.</div>
+      <div class="admin-tabs admin-groups" id="adminTabs" role="tablist" aria-label="Rotinas administrativas">
+        <button data-group="painel" class="active" role="tab" aria-selected="true">Visão geral</button>
+        <button data-group="acervo" role="tab" aria-selected="false">Acervo</button>
+        <button data-group="circulacao" role="tab" aria-selected="false">Circulação</button>
+        <button data-group="pessoas" role="tab" aria-selected="false">Pessoas</button>
+        <button data-group="contribuicoes" role="tab" aria-selected="false">Contribuições</button>
+        <button data-group="ferramentas" role="tab" aria-selected="false">Ferramentas</button>
       </div>
+      <div class="admin-quick-links" id="adminQuickLinks" aria-label="Ações da rotina"></div>
       <div class="admin-panel show" id="tab-painel">
-        <div class="chart-grid">
+        <div id="alertasAtraso" style="margin:0 0 12px;"></div>
+        <details class="admin-details">
+          <summary>Relatórios e gráficos</summary>
+          <div class="chart-grid">
           <div class="chart-box wide"><h4>Aluguéis por período</h4>
             <div style="display:flex; gap:8px; margin-bottom:10px;">
               <button class="btn small" data-period="7">7 dias</button>
@@ -1755,8 +2290,8 @@
           <div class="chart-box"><h4>Categorias mais utilizadas</h4><canvas id="chartCategorias" height="140"></canvas></div>
           <div class="chart-box"><h4>Usuários mais ativos</h4><canvas id="chartUsuarios" height="140"></canvas></div>
           <div class="chart-box"><h4>Crescimento de usuários</h4><canvas id="chartCrescimento" height="140"></canvas></div>
-        </div>
-        <div id="alertasAtraso" style="margin-top:16px;"></div>
+          </div>
+        </details>
       </div>
 
       <div class="admin-panel" id="tab-estoque">
@@ -1782,19 +2317,33 @@
         <div id="avaliacoesList"></div>
       </div>
 
-      <div class="admin-panel" id="tab-transacoes">
-        <h3 style="font-size:1rem; margin-bottom:8px;">Últimos movimentos</h3>
+      <div class="admin-panel" id="tab-transacoes" role="tabpanel">
+        <div id="adminLoansList"></div>
+        <h3 style="font-size:1rem; margin:18px 0 8px;">Últimos movimentos</h3>
         <table>
           <thead><tr><th>Data</th><th>Tipo</th><th>Livro</th><th>Usuário</th><th>Multa</th></tr></thead>
           <tbody id="transBody"></tbody>
         </table>
       </div>
 
-      <div class="admin-panel" id="tab-sugestoes">
+      <div class="admin-panel" id="tab-reservas" role="tabpanel">
+        <div id="reservasAdminList"></div>
+      </div>
+
+      <div class="admin-panel" id="tab-sugestoes" role="tabpanel">
         <div id="sugestoesAdminList"></div>
       </div>
 
-      <div class="admin-panel" id="tab-novo">
+      <div class="admin-panel" id="tab-suporte" role="tabpanel">
+        <div class="support-admin-toolbar"><label for="supportStatusFilter">Mostrar</label><select id="supportStatusFilter"><option value="todos">Todos os relatos</option><option value="aberto">Abertos</option><option value="em_analise">Em análise</option><option value="resolvido">Resolvidos</option><option value="arquivado">Arquivados</option></select></div>
+        <div id="supportAdminList"></div>
+      </div>
+
+      <div class="admin-panel" id="tab-auditoria" role="tabpanel">
+        <div id="auditoriaAdminList"></div>
+      </div>
+
+      <div class="admin-panel" id="tab-novo" role="tabpanel">
         <div class="field"><label>Título</label><input id="nTitulo" /></div>
         <div class="field-2col">
           <div class="field"><label>Autor</label><input id="nAutor" /></div>
@@ -1818,7 +2367,11 @@
           <label>Capa</label>
           <div class="field-2col">
             <div><input id="nCapaManual" placeholder="Cole aqui uma URL de imagem..." /><div class="field-hint">...ou deixe em branco para busca automática pelo ISBN.</div></div>
-            <div><input id="nCapaArquivo" type="file" accept="image/*" /><div class="field-hint">...ou envie um arquivo de imagem do seu computador.</div></div>
+            <div class="cover-dropzone" id="nCapaDropzone" tabindex="0" role="button" aria-label="Selecionar ou arrastar capa do livro">
+              <strong>Selecionar nova capa</strong>
+              <span>Arraste JPG, PNG ou WEBP aqui</span>
+              <input id="nCapaArquivo" type="file" accept="image/jpeg,image/png,image/webp" hidden />
+            </div>
           </div>
           <div class="field-hint">Se nada for informado e o ISBN estiver preenchido, o Lúmen tentará localizar a capa automaticamente ao salvar. Caso não encontre, uma capa padrão será usada.</div>
           <img id="capaPreview" class="capa-preview" style="display:none;" />
@@ -1835,10 +2388,23 @@
             <div class="field"><label>Título</label><input id="eTitulo" /></div>
             <div class="field-2col"><div class="field"><label>Autor</label><input id="eAutor" /></div><div class="field"><label>ISBN</label><input id="eIsbn" /></div></div>
             <div class="field-2col"><div class="field"><label>Editora</label><input id="eEditora" /></div><div class="field"><label>Ano</label><input id="eAno" type="number" /></div></div>
-            <div class="field-2col"><div class="field"><label>Gênero</label><input id="eGenero" /></div><div class="field"><label>Páginas</label><input id="ePaginas" type="number" /></div></div>
+            <div class="field-2col"><div class="field"><label>Gênero</label><input id="eGenero" /></div><div class="field"><label>Páginas</label><input id="ePaginas" type="number" min="0" /></div></div>
+            <div class="field-2col"><div class="field"><label>Idioma original</label><input id="eIdioma" /></div><div class="field"><label>Tradução</label><input id="eTraducao" /></div></div>
             <div class="field"><label>Sinopse</label><textarea id="eSinopse"></textarea></div>
             <div class="field-2col"><div class="field"><label>Estoque total</label><input id="eEstoqueTotal" type="number" min="0" /></div><div class="field"><label>Disponíveis</label><input id="eEstoqueDisp" type="number" min="0" /></div></div>
-            <div class="field"><label>URL da capa</label><input id="eCapa" placeholder="URL da imagem" /></div>
+            <div class="field cover-editor" data-cover-editor="edit">
+              <label for="eCapa">Capa do livro</label>
+              <div class="cover-current-row">
+                <div class="cover-current"><span>Capa atual</span><img id="eCapaPreview" alt="Prévia da capa atual" /></div>
+                <div class="cover-dropzone" id="eCapaDropzone" tabindex="0" role="button" aria-label="Selecionar nova capa ou arrastar imagem">
+                  <strong>Selecionar nova capa</strong>
+                  <span>Arraste JPG, PNG ou WEBP aqui</span>
+                  <input id="eCapaArquivo" type="file" accept="image/jpeg,image/png,image/webp" hidden />
+                </div>
+              </div>
+              <div class="cover-url-row"><input id="eCapa" placeholder="URL segura da capa" /><button type="button" class="btn small ghost" id="eBuscarCapaEdit">Buscar por ISBN</button></div>
+              <div class="cover-actions"><button type="button" class="btn small ghost" id="eRemoverCapa">Remover capa</button><span class="capa-status" id="eCapaStatus"></span></div>
+            </div>
             <button class="btn" id="saveEditBook">Salvar alterações</button>
             <button class="btn ghost" id="deleteBookBtn" style="margin-left:10px;">Excluir livro</button>
           </div>
@@ -1851,9 +2417,9 @@
           <div class="field"><label>Multa por dia de atraso (R$)</label><input id="cfgMulta" type="number" min="0" step="0.1" /></div>
         </div>
         <div class="field">
-          <label>Livro da semana (ID do livro)</label>
-          <input id="cfgLivroSemana" placeholder="ID do livro (ex: b1)" />
-          <div class="field-hint">Copie o ID do livro na lista de estoque.</div>
+          <label for="cfgLivroSemana">Livro da semana</label>
+          <select id="cfgLivroSemana"><option value="">— Nenhum destaque —</option></select>
+          <div class="field-hint">Selecione pelo título; IDs antigos continuam compatíveis.</div>
         </div>
         <button class="btn" id="saveConfigBtn">Salvar configurações</button>
         <p class="field-hint" style="margin-top:14px;">Essas configurações valem para novos aluguéis e para o cálculo de multas nas devoluções.</p>
@@ -1876,11 +2442,19 @@
     // POLYFILL window.storage (localStorage)
     // ============================================================
     window.storage = {
+      // Adapter local/demo: o backend real deve substituir este objeto por uma API.
       get: (key, isGlobal) => {
         try {
-          const value = localStorage.getItem(key);
-          return { value: value ? JSON.parse(value) : null };
+          const raw = localStorage.getItem(key);
+          if (!raw) return { value: null };
+          let value = JSON.parse(raw);
+          // Compatibilidade com o formato antigo, que serializava duas vezes.
+          if (typeof value === 'string') {
+            try { value = JSON.parse(value); } catch (e) { /* valor legado simples */ }
+          }
+          return { value };
         } catch (e) {
+          console.warn('Não foi possível ler o armazenamento local.', e);
           return { value: null };
         }
       },
@@ -1889,6 +2463,7 @@
           localStorage.setItem(key, JSON.stringify(value));
           return true;
         } catch (e) {
+          console.error('Não foi possível salvar no armazenamento local.', e);
           return false;
         }
       },
@@ -1897,6 +2472,7 @@
           localStorage.removeItem(key);
           return true;
         } catch (e) {
+          console.error('Não foi possível remover o registro local.', e);
           return false;
         }
       }
@@ -1907,10 +2483,31 @@
     // ============================================================
     const DB_KEY = 'lumen-db';
     const SESSION_KEY = 'lumen-session';
+    // Credencial mantida apenas para demonstração local. Não é segurança de produção.
     const ADMIN_PASSWORD = 'admin123';
+    const DB_SCHEMA_VERSION = 3;
     const LIMITE_LIVROS_POR_USUARIO = 3;
+    const SUPPORT_STATUS = Object.freeze({
+      ABERTO: 'aberto',
+      EM_ANALISE: 'em_analise',
+      RESOLVIDO: 'resolvido',
+      ARQUIVADO: 'arquivado'
+    });
+    const SUPPORT_CATEGORIES = Object.freeze(['login', 'catalogo', 'emprestimo', 'reserva', 'avaliacao', 'sugestao', 'outro']);
+    const ADMIN_GROUPS = Object.freeze({
+      painel: ['painel'],
+      acervo: ['estoque', 'novo'],
+      circulacao: ['transacoes', 'reservas'],
+      pessoas: ['usuarios', 'avaliacoes'],
+      contribuicoes: ['sugestoes', 'suporte'],
+      ferramentas: ['procurados', 'config', 'pesquisa', 'auditoria']
+    });
+    const MAX_COVER_FILE_SIZE = 2 * 1024 * 1024;
+    const ALLOWED_COVER_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
 
-    // ---- NOVA LOGO: LIVRO ABERTO COM CHAMA ----
+    // ---- LOGO PRINCIPAL ----
+    // Arquivo fornecido pelo projeto; o SVG embutido abaixo permanece como fallback local.
+    const LOGO_SRC = 'assets/lumen-logo.png';
     const LOGO_DATA_URI = (function() {
       const svg =
         `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
@@ -1946,10 +2543,8 @@
 
     // ---- Cores das lombadas ----
     const SPINE_COLORS = [
-      '#7A4E2D', '#2F4858', '#8C2F39', '#3D5A40', '#4A3B78',
-      '#B08B2E', '#5C4033', '#1F5673', '#6B2D5C', '#2E5E4E',
-      '#8A3324', '#3B4A6B', '#6E5B3E', '#4E2F4E', '#2C6E49',
-      '#7A2E2E', '#33526B', '#5A4A2E', '#3E2C5A', '#2E4E3E'
+      '#5C4429', '#79603C', '#8A5B34', '#6A4425', '#A9855A',
+      '#D9C39C', '#40301F', '#2C2013', '#B08A52', '#7A6650'
     ];
 
     // ---- Frases do bibliotecário ----
@@ -2054,6 +2649,7 @@
 
     // ---- Estrutura do banco de dados ----
     let DB = {
+      schemaVersion: DB_SCHEMA_VERSION,
       books: [],
       users: [],
       transactions: [],
@@ -2064,80 +2660,129 @@
       favoritos: [],
       reservas: [],
       sugestoes: [],
-      notificacoes: []
+      suporte: [],
+      notificacoes: [],
+      auditLog: []
     };
 
     let SESSION = { userId: null };
     let UI_STATE = { filtroGenero: null, busca: '', ordenacao: 'az' };
+    let capaArquivoDataUrl = null;
+    let editCapaDataUrl = null;
+    let editCapaRemovida = false;
+    let capaBuscaToken = 0;
     let dashboardCharts = {};
     let currentPeriod = 180;
     let pendingAction = null;
+    let activeAdminGroup = 'painel';
 
     // ============================================================
     // FUNÇÕES DE PERSISTÊNCIA
     // ============================================================
     function estruturaPadraoDB() {
       return {
+        schemaVersion: DB_SCHEMA_VERSION,
         books: [],
         users: [],
         transactions: [],
         searchLog: {},
         visits: 0,
         loans: [],
-        settings: { prazoDias: 14, multaPorDia: 1, livroSemanaId: null },
+        settings: { prazoDias: 14, multaPorDia: 1, limiteLivros: 3, livroSemanaId: null },
         favoritos: [],
         reservas: [],
         sugestoes: [],
-        notificacoes: []
+        suporte: [],
+        notificacoes: [],
+        auditLog: []
       };
+    }
+
+    function migrateDB(value, padrao) {
+      const salvo = value && typeof value === 'object' ? value : {};
+      const migrado = Object.assign({}, padrao, salvo);
+      migrado.schemaVersion = Number(salvo.schemaVersion) || 1;
+      migrado.settings = Object.assign({}, padrao.settings, salvo.settings || {});
+      ['books', 'users', 'transactions', 'loans', 'favoritos', 'reservas', 'sugestoes', 'suporte', 'notificacoes', 'auditLog']
+        .forEach(key => { if (!Array.isArray(migrado[key])) migrado[key] = []; });
+      if (!migrado.searchLog || typeof migrado.searchLog !== 'object') migrado.searchLog = {};
+      migrateBooks(migrado.books);
+
+      migrado.reservas.forEach(reserva => {
+        if (!reserva.status) reserva.status = 'ativa';
+        if (!('notifiedAt' in reserva)) reserva.notifiedAt = null;
+        if (!('retiradaAte' in reserva)) reserva.retiradaAte = null;
+      });
+      migrateSupport(migrado.suporte);
+      migrado.sugestoes.forEach(sugestao => {
+        if (!sugestao.status) sugestao.status = 'pendente';
+        if (!('administradorId' in sugestao)) sugestao.administradorId = null;
+        if (!('administradorNome' in sugestao)) sugestao.administradorNome = null;
+        if (!('observacaoAdmin' in sugestao)) sugestao.observacaoAdmin = '';
+        if (!('dataAtualizacao' in sugestao)) sugestao.dataAtualizacao = sugestao.data || null;
+      });
+      migrado.notificacoes.forEach(notificacao => {
+        if (!notificacao.tipo) notificacao.tipo = 'aviso';
+        if (!('referenciaId' in notificacao)) notificacao.referenciaId = null;
+        if (!notificacao.prioridade) notificacao.prioridade = 'normal';
+        if (!('lida' in notificacao)) notificacao.lida = false;
+      });
+
+      // A versão 3 adiciona suporte e preserva todo o conteúdo existente.
+      migrado.schemaVersion = DB_SCHEMA_VERSION;
+      return migrado;
     }
 
     async function loadDB() {
       const padrao = estruturaPadraoDB();
       try {
         const result = await window.storage.get(DB_KEY, true);
-        if (result && result.value) {
-          const salvo = JSON.parse(result.value);
-          DB = Object.assign({}, padrao, salvo);
-          DB.settings = Object.assign({}, padrao.settings, salvo.settings || {});
-        } else {
-          DB = padrao;
-        }
+        DB = result && result.value ? migrateDB(result.value, padrao) : padrao;
       } catch (e) {
+        console.error('Erro ao carregar o banco demo:', e);
         DB = padrao;
       }
       if (!DB.books || DB.books.length === 0) {
         DB.books = JSON.parse(JSON.stringify(DEFAULT_BOOKS));
+        migrateBooks(DB.books);
       }
-      migrateBooks();
-      DB.visits = (DB.visits || 0) + 1;
+      DB.visits = (Number(DB.visits) || 0) + 1;
       await saveDB();
     }
 
     async function saveDB() {
       try {
-        await window.storage.set(DB_KEY, JSON.stringify(DB), true);
+        DB.schemaVersion = DB_SCHEMA_VERSION;
+        const ok = await window.storage.set(DB_KEY, DB, true);
+        if (!ok) throw new Error('storage.set retornou falso');
+        return true;
       } catch (e) {
         console.error('Erro ao salvar DB:', e);
+        showToast('Não foi possível salvar os dados locais.');
+        return false;
       }
     }
 
     async function loadSession() {
       try {
         const result = await window.storage.get(SESSION_KEY, false);
-        if (result && result.value) {
-          SESSION = JSON.parse(result.value);
-        }
+        const value = result && result.value;
+        SESSION = value && typeof value === 'object' ? value : { userId: null };
       } catch (e) {
+        console.error('Erro ao carregar sessão:', e);
         SESSION = { userId: null };
       }
     }
 
     async function saveSession() {
       try {
-        await window.storage.set(SESSION_KEY, JSON.stringify(SESSION), false);
+        const ok = await window.storage.set(SESSION_KEY, SESSION, false);
+        if (!ok) throw new Error('storage.set retornou falso');
+        return true;
       } catch (e) {
         console.error('Erro ao salvar sessão:', e);
+        showToast('Não foi possível salvar a sessão.');
+        return false;
       }
     }
 
@@ -2148,8 +2793,8 @@
       } catch (e) { /* ignora */ }
     }
 
-    function migrateBooks() {
-      DB.books.forEach(book => {
+    function migrateBooks(books = DB.books) {
+      (books || []).forEach(book => {
         delete book.preco;
         if (!('isbn' in book)) book.isbn = '';
         if (!('editora' in book)) book.editora = '';
@@ -2160,11 +2805,110 @@
         if (!('paginas' in book)) book.paginas = null;
         if (!('sinopse' in book)) book.sinopse = '';
         if (!('capa' in book)) book.capa = '';
-        if (!('estoqueTotal' in book)) book.estoqueTotal = 1;
-        if (!('estoqueDisp' in book)) book.estoqueDisp = book.estoqueTotal;
         if (!('avaliacoes' in book) || !Array.isArray(book.avaliacoes)) book.avaliacoes = [];
+        if (!('adicionadoEm' in book)) book.adicionadoEm = null;
+        if (!('archived' in book)) book.archived = false;
+        if (!book.status) book.status = book.archived ? 'arquivado' : 'ativo';
+        book.estoqueTotal = Math.max(0, Number.parseInt(book.estoqueTotal, 10) || 0);
+        book.estoqueDisp = Math.max(0, Math.min(book.estoqueTotal,
+          Number.parseInt(book.estoqueDisp, 10) || 0));
       });
     }
+
+    function migrateSupport(records = DB.suporte) {
+      (records || []).forEach(relato => {
+        if (!relato.status || !Object.values(SUPPORT_STATUS).includes(relato.status)) relato.status = SUPPORT_STATUS.ABERTO;
+        if (!SUPPORT_CATEGORIES.includes(relato.categoria)) relato.categoria = 'outro';
+        if (!('respostaAdmin' in relato)) relato.respostaAdmin = '';
+        if (!('administradorId' in relato)) relato.administradorId = null;
+        if (!('administradorNome' in relato)) relato.administradorNome = null;
+        if (!relato.criadoEm) relato.criadoEm = relato.data || new Date().toISOString();
+        if (!relato.atualizadoEm) relato.atualizadoEm = relato.criadoEm;
+      });
+    }
+
+    function findBook(bookId) {
+      return DB.books.find(book => book.id === bookId) || null;
+    }
+
+    function findUser(userId) {
+      return DB.users.find(user => user.id === userId) || null;
+    }
+
+    function estoqueEmprestado(bookId) {
+      return DB.loans.filter(loan => loan.bookId === bookId && loan.status === 'ativo').length;
+    }
+
+    function reservasAtivas(bookId) {
+      return DB.reservas.filter(reserva => reserva.bookId === bookId &&
+        ['ativa', 'notificada'].includes(reserva.status));
+    }
+
+    function resumoEstoque(book) {
+      if (!book) return { total: 0, disponivel: 0, emprestado: 0, reservado: 0 };
+      const emprestado = estoqueEmprestado(book.id);
+      const reservado = reservasAtivas(book.id).length;
+      return {
+        total: Math.max(0, Number(book.estoqueTotal) || 0),
+        disponivel: Math.max(0, Number(book.estoqueDisp) || 0),
+        emprestado,
+        reservado
+      };
+    }
+
+    function hasBookHistory(bookId) {
+      return DB.loans.some(loan => loan.bookId === bookId) ||
+        DB.transactions.some(transaction => transaction.bookId === bookId) ||
+        DB.reservas.some(reserva => reserva.bookId === bookId) ||
+        DB.favoritos.some(favorito => favorito.bookId === bookId) ||
+        DB.books.some(book => book.id === bookId && (book.avaliacoes || []).length > 0);
+    }
+
+    function getAdminActor() {
+      return { id: 'local-admin', nome: 'Administrador local' };
+    }
+
+    async function registrarAuditoria(acao, entidade, entidadeId, antes, depois) {
+      if (!Array.isArray(DB.auditLog)) DB.auditLog = [];
+      const actor = getAdminActor();
+      DB.auditLog.unshift({
+        id: 'audit_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7),
+        acao,
+        entidade,
+        entidadeId: entidadeId || null,
+        antes: antes ? JSON.parse(JSON.stringify(antes)) : null,
+        depois: depois ? JSON.parse(JSON.stringify(depois)) : null,
+        usuarioId: actor.id,
+        usuarioNome: actor.nome,
+        data: new Date().toISOString()
+      });
+      DB.auditLog = DB.auditLog.slice(0, 500);
+    }
+
+    // Pontos de troca para um backend futuro. No modo demo, operam sobre DB/localStorage.
+    const DataService = {
+      listBooks: () => DB.books,
+      findBook,
+      listUsers: () => DB.users,
+      findUser,
+      createBook: book => { DB.books.push(book); return book; },
+      updateBook: (bookId, changes) => Object.assign(findBook(bookId) || {}, changes),
+      archiveBook: bookId => {
+        const book = findBook(bookId);
+        if (book) { book.archived = true; book.status = 'arquivado'; }
+        return book;
+      },
+      listLoans: () => DB.loans,
+      returnLoan: devolverLivro,
+      listReservations: () => DB.reservas,
+      cancelReservation: cancelReserva,
+      listSupportRequests: () => DB.suporte,
+      createSupportRequest: criarSolicitacaoSuporte,
+      updateSupportRequest: atualizarSolicitacaoSuporte,
+      createNotification: notificarUsuario,
+      addTransaction,
+      registerAudit: registrarAuditoria
+    };
 
     async function logSearch(termo) {
       if (!termo) return;
@@ -2285,26 +3029,75 @@
     }
 
     // ---- Capas ----
+    function normalizeISBN(value) {
+      return String(value || '').replace(/[^0-9Xx]/g, '').toUpperCase();
+    }
+
+    function isValidISBN(value) {
+      const isbn = normalizeISBN(value);
+      if (!isbn) return false;
+      if (isbn.length === 10) {
+        if (!/^\d{9}[\dX]$/.test(isbn)) return false;
+        const total = isbn.split('').reduce((sum, char, index) =>
+          sum + (char === 'X' ? 10 : Number(char)) * (10 - index), 0);
+        return total % 11 === 0;
+      }
+      if (isbn.length === 13) {
+        if (!/^\d{13}$/.test(isbn)) return false;
+        const total = isbn.split('').reduce((sum, char, index) =>
+          sum + Number(char) * (index % 2 ? 3 : 1), 0);
+        return total % 10 === 0;
+      }
+      return false;
+    }
+
+    function safeImageUrl(value) {
+      const url = String(value || '').trim();
+      if (!url) return null;
+      if (/^data:image\/(?:jpeg|jpg|png|webp|svg\+xml);base64,/i.test(url)) return url;
+      try {
+        const parsed = new URL(url, window.location.href);
+        if (['http:', 'https:'].includes(parsed.protocol)) return parsed.href;
+      } catch (e) { /* URL inválida */ }
+      return null;
+    }
+
     function capaDoLivro(book) {
-      if (book && book.capa) return book.capa;
-      return capaPadrao(book);
+      const capa = safeImageUrl(book && book.capa);
+      return capa || capaPadrao(book);
+    }
+
+    function verificarImagem(url, timeout = 5000) {
+      return new Promise(resolve => {
+        const image = new Image();
+        const timer = setTimeout(() => { image.src = ''; resolve(false); }, timeout);
+        image.onload = () => { clearTimeout(timer); resolve(image.naturalWidth > 0 && image.naturalHeight > 0); };
+        image.onerror = () => { clearTimeout(timer); resolve(false); };
+        image.src = url;
+      });
     }
 
     async function buscarCapaPorISBN(isbn) {
-      if (!isbn) return null;
+      const normalized = normalizeISBN(isbn);
+      if (!normalized || !isValidISBN(normalized)) return null;
       try {
-        const resp = await fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}`);
+        const resp = await fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${encodeURIComponent(normalized)}`);
         if (resp.ok) {
           const data = await resp.json();
-          const link = data?.items?.[0]?.volumeInfo?.imageLinks?.thumbnail;
-          if (link) return link.replace('http://', 'https://');
+          const links = data?.items?.flatMap(item => {
+            const info = item.volumeInfo || {};
+            return [info.imageLinks?.large, info.imageLinks?.medium, info.imageLinks?.thumbnail].filter(Boolean);
+          }) || [];
+          for (const link of links) {
+            const candidate = String(link).replace(/^http:/, 'https:');
+            if (await verificarImagem(candidate)) return candidate;
+          }
         }
-      } catch (e) { /* fallback */ }
+      } catch (e) { console.warn('Google Books indisponível para esta capa.', e); }
       try {
-        const url = `https://covers.openlibrary.org/b/isbn/${isbn}-M.jpg`;
-        const resp = await fetch(url, { method: 'HEAD' });
-        if (resp.ok) return url;
-      } catch (e) { /* ignora */ }
+        const url = `https://covers.openlibrary.org/b/isbn/${encodeURIComponent(normalized)}-M.jpg`;
+        if (await verificarImagem(url)) return url;
+      } catch (e) { console.warn('Open Library indisponível para esta capa.', e); }
       return null;
     }
 
@@ -2377,6 +3170,44 @@
       return DB.users.find(u => u.id === SESSION.userId) || null;
     }
 
+    function formatarStatusSuporte(status) {
+      return ({ aberto: 'Aberto', em_analise: 'Em análise', resolvido: 'Resolvido', arquivado: 'Arquivado' })[status] || 'Aberto';
+    }
+
+    function formatarCategoriaSuporte(categoria) {
+      return ({ login: 'Login ou cadastro', catalogo: 'Catálogo e busca', emprestimo: 'Empréstimo ou devolução', reserva: 'Reserva', avaliacao: 'Avaliação', sugestao: 'Sugestão', outro: 'Outro' })[categoria] || 'Outro';
+    }
+
+    function criarSolicitacaoSuporte(dados) {
+      const user = getUsuarioLogado();
+      const agora = new Date().toISOString();
+      const relato = {
+        id: 'sup_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7),
+        userId: user ? user.id : null,
+        usuarioNome: String(dados.nome || (user ? user.nome : 'Leitor')).trim().slice(0, 80),
+        email: String(dados.email || (user ? user.email : '')).trim().toLowerCase().slice(0, 120),
+        categoria: SUPPORT_CATEGORIES.includes(dados.categoria) ? dados.categoria : 'outro',
+        pagina: String(dados.pagina || '').trim().slice(0, 120),
+        mensagem: String(dados.mensagem || '').trim().slice(0, 1000),
+        status: SUPPORT_STATUS.ABERTO,
+        respostaAdmin: '',
+        administradorId: null,
+        administradorNome: null,
+        criadoEm: agora,
+        atualizadoEm: agora,
+        respondidoEm: null
+      };
+      DB.suporte.unshift(relato);
+      return relato;
+    }
+
+    function atualizarSolicitacaoSuporte(relatoId, changes = {}) {
+      const relato = DB.suporte.find(item => item.id === relatoId);
+      if (!relato) return null;
+      Object.assign(relato, changes, { atualizadoEm: new Date().toISOString() });
+      return relato;
+    }
+
     // ============================================================
     // RENDERIZAÇÃO PRINCIPAL
     // ============================================================
@@ -2385,16 +3216,19 @@
       const linha2 = document.getElementById('shelfRowBottom');
       if (!linha1 || !linha2) return;
 
-      const livros = DB.books;
+      const livros = DB.books.filter(book => !book.archived && book.status !== 'arquivado');
       const metade = Math.ceil(livros.length / 2);
       const grupo1 = livros.slice(0, metade);
       const grupo2 = livros.slice(metade);
 
       const gerarLombadas = (grupo) => grupo.map(book => {
-        const cor = SPINE_COLORS[Math.abs(hashCode(book.id)) % SPINE_COLORS.length];
+        const cor = SPINE_COLORS[Math.abs(hashCode(book.id || book.titulo || '')) % SPINE_COLORS.length];
+        const titulo = String(book.titulo || '');
+        const width = 26 + (titulo.length * 3) % 20;
+        const height = 108 + (titulo.length * 5) % 60;
         return `
-          <div class="spine" style="background:${cor};" data-book-id="${book.id}" title="${escapeHTML(book.titulo)}">
-            <span class="spine-title">${escapeHTML(book.titulo)}</span>
+          <div class="spine" style="background:${cor}; width:${width}px; height:${height}px;" data-book-id="${escapeHTML(book.id)}" title="${escapeHTML(titulo)}" tabindex="0" role="button" aria-label="Abrir detalhes de ${escapeHTML(titulo)}">
+            <span class="spine-title">${escapeHTML(titulo)}</span>
           </div>`;
       }).join('');
 
@@ -2403,6 +3237,12 @@
 
       document.querySelectorAll('.spine').forEach(el => {
         el.addEventListener('click', () => openBook(el.dataset.bookId));
+        el.addEventListener('keydown', event => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            openBook(el.dataset.bookId);
+          }
+        });
       });
     }
 
@@ -2410,7 +3250,14 @@
       const container = document.getElementById('filters');
       if (!container) return;
 
-      const generos = [...new Set(DB.books.map(b => b.genero).filter(Boolean))].sort();
+      const activeBooks = DB.books.filter(book => !book.archived && book.status !== 'arquivado');
+      const generos = [...new Set(activeBooks.map(b => b.genero).filter(Boolean))].sort();
+      const genreSelect = document.getElementById('filterGenre');
+      if (genreSelect) {
+        const selected = genreSelect.value || 'all';
+        genreSelect.innerHTML = '<option value="all">Todos os gêneros</option>' + generos.map(g => `<option value="${escapeHTML(g)}">${escapeHTML(g)}</option>`).join('');
+        genreSelect.value = generos.includes(selected) ? selected : 'all';
+      }
 
       let html = `<button class="filter-btn ${!UI_STATE.filtroGenero ? 'active' : ''}" data-genero="">Todos</button>`;
       html += generos.map(g =>
@@ -2441,8 +3288,12 @@
           return copia.sort((a, b) => avgRating(b) - avgRating(a));
         case 'recent':
           return copia.sort((a, b) => (b.ano || 0) - (a.ano || 0));
+        case 'oldest':
+          return copia.sort((a, b) => (a.ano || 9999) - (b.ano || 9999));
         case 'mostLoaned':
           return copia.sort((a, b) => contarAlugueis(b.id) - contarAlugueis(a.id));
+        case 'recentlyAdded':
+          return copia.sort((a, b) => new Date(b.adicionadoEm || 0) - new Date(a.adicionadoEm || 0));
         default:
           return copia;
       }
@@ -2456,7 +3307,7 @@
       const container = document.getElementById('grid');
       if (!container) return;
 
-      let livros = DB.books;
+      let livros = DB.books.filter(book => !book.archived && book.status !== 'arquivado');
 
       if (UI_STATE.filtroGenero) {
         livros = livros.filter(b => b.genero === UI_STATE.filtroGenero);
@@ -2467,9 +3318,11 @@
         livros = livros.filter(b =>
           normalize(b.titulo).includes(termo) ||
           normalize(b.autor).includes(termo) ||
-          normalize(b.isbn || '').includes(termo) ||
-          normalize(b.editora || '').includes(termo) ||
-          normalize(b.genero || '').includes(termo)
+           normalize((b.isbn || '').replace(/[\s-]/g, '')).includes(termo.replace(/[\s-]/g, '')) ||
+           normalize(b.editora || '').includes(termo) ||
+           normalize(b.genero || '').includes(termo) ||
+           normalize(b.idioma || '').includes(termo) ||
+           normalize(b.palavrasChave || '').includes(termo)
         );
       }
 
@@ -2480,8 +3333,8 @@
       const yearFilter = document.getElementById('filterYear')?.value?.trim() || '';
 
       if (genreFilter !== 'all') livros = livros.filter(b => b.genero === genreFilter);
-      if (authorFilter) livros = livros.filter(b => b.autor.toLowerCase().includes(authorFilter));
-      if (languageFilter) livros = livros.filter(b => b.idioma.toLowerCase().includes(languageFilter));
+      if (authorFilter) livros = livros.filter(b => normalize(b.autor).includes(normalize(authorFilter)));
+      if (languageFilter) livros = livros.filter(b => normalize(b.idioma).includes(normalize(languageFilter)));
       if (yearFilter) livros = livros.filter(b => String(b.ano).includes(yearFilter));
       if (availabilityFilter === 'disponiveis') livros = livros.filter(b => b.estoqueDisp > 0);
       else if (availabilityFilter === 'indisponiveis') livros = livros.filter(b => b.estoqueDisp === 0);
@@ -2502,18 +3355,25 @@
         return;
       }
 
-      container.innerHTML = livros.map(book => {
+      container.innerHTML = livros.map((book, index) => {
         const media = avgRating(book);
         const disponivel = book.estoqueDisp > 0;
+        const capa = escapeHTML(capaDoLivro(book));
         return `
-          <div class="book-card" data-book-id="${book.id}">
+          <div class="book-card" data-book-id="${escapeHTML(book.id)}" style="--book-delay:${Math.min(index, 14) * 35}ms;">
             <div class="book-stage">
-              <div class="book" data-open="${book.id}">
+              <div class="book" data-open="${escapeHTML(book.id)}" tabindex="0" role="button" aria-label="Abrir detalhes de ${escapeHTML(book.titulo)}">
                 <div class="book-cover">
-                  <img src="${capaDoLivro(book)}" alt="Capa de ${escapeHTML(book.titulo)}" loading="lazy" />
+                  <img src="${capa}" data-book-image="${escapeHTML(book.id)}" alt="Capa de ${escapeHTML(book.titulo)}" loading="lazy" />
                   <div class="book-spine-edge"></div>
                 </div>
                 <div class="book-stamp ${disponivel ? '' : 'out'}">${disponivel ? 'DISPONÍVEL' : 'INDISPONÍVEL'}</div>
+                <div class="book-hover-info" aria-hidden="true">
+                  <strong>${escapeHTML(book.titulo)}</strong>
+                  <p>${escapeHTML(book.sinopse || 'Sinopse não cadastrada.')}</p>
+                  <div class="hover-meta">${escapeHTML(book.isbn || 'ISBN não cadastrado')} · ${escapeHTML(book.editora || 'Editora não informada')} · ${book.estoqueDisp} disponível(is)</div>
+                  <button class="btn small" type="button" data-hover-open="${escapeHTML(book.id)}">Abrir detalhes</button>
+                </div>
               </div>
             </div>
             <div class="book-caption">
@@ -2527,6 +3387,26 @@
 
       container.querySelectorAll('[data-open]').forEach(el => {
         el.addEventListener('click', () => openBook(el.dataset.open));
+        el.addEventListener('keydown', event => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            openBook(el.dataset.open);
+          }
+        });
+      });
+      container.querySelectorAll('[data-hover-open]').forEach(button => {
+        button.addEventListener('click', event => {
+          event.stopPropagation();
+          openBook(button.dataset.hoverOpen);
+        });
+      });
+      container.querySelectorAll('[data-book-image]').forEach(image => {
+        image.addEventListener('error', () => {
+          if (image.dataset.fallbackApplied) return;
+          image.dataset.fallbackApplied = 'true';
+          const book = findBook(image.dataset.bookImage);
+          image.src = capaPadrao(book);
+        }, { once: true });
       });
     }
 
@@ -2552,9 +3432,10 @@
             <div>
               <strong>${escapeHTML(book ? book.titulo : 'Livro removido')}</strong>
               <p>Retirado em: ${fmtDataCurta(loan.data)}</p>
-              <p>Prazo: ${fmtDataCurta(loan.prazo)} ${atrasado ? '<span class="tag-atraso">Atrasado</span>' : ''}</p>
+              <p>Prazo: ${fmtDataCurta(loan.prazo)} — ${escapeHTML(resumoPrazo(loan))}</p>
               ${loan.dataDevolucao ? `<p>Devolvido em: ${fmtDataCurta(loan.dataDevolucao)}</p>` : ''}
-              ${loan.multa ? `<p>Multa: ${fmtMoeda(loan.multa)}</p>` : ''}
+              ${ativo && calcularMultaEstimada(loan) ? `<p>Multa estimada: ${fmtMoeda(calcularMultaEstimada(loan))}</p>` : ''}
+              ${loan.multa ? `<p>Multa final: ${fmtMoeda(loan.multa)}</p>` : ''}
             </div>
             ${ativo ? `<button class="btn-devolver" data-loan-id="${loan.id}">Devolver</button>` : ''}
           </div>`;
@@ -2609,11 +3490,34 @@
         return;
       }
 
-      const naoLidas = DB.notificacoes.filter(n => n.userId === usuario.id && !n.lida);
+      const minhas = DB.notificacoes.filter(n => n.userId === usuario.id).slice(0, 10);
+      const naoLidas = minhas.filter(n => !n.lida);
       dot.style.display = naoLidas.length ? 'block' : 'none';
-      panel.innerHTML = DB.notificacoes.length ?
-        DB.notificacoes.slice(0, 10).map(n => `<div class="notif-item">${escapeHTML(n.mensagem)} <small>${fmtData(n.data)}</small></div>`).join('') :
+      panel.innerHTML = minhas.length ? `
+        <div class="notif-panel-head"><strong>Avisos</strong><button type="button" class="btn small ghost" id="markNotificationsRead">Marcar lidas</button></div>
+        ${minhas.map(n => `<button type="button" class="notif-item ${n.lida ? '' : 'unread'}" data-notification-id="${escapeHTML(n.id)}"><span>${escapeHTML(n.mensagem)}</span><small>${fmtData(n.data)}</small></button>`).join('')}` :
         `<div class="notif-empty">Nenhuma notificação.</div>`;
+      const mark = document.getElementById('markNotificationsRead');
+      if (mark) mark.onclick = markAllNotificationsRead;
+      panel.querySelectorAll('[data-notification-id]').forEach(item => {
+        item.onclick = () => markNotificationRead(item.dataset.notificationId);
+      });
+    }
+
+    async function markNotificationRead(notificationId) {
+      const notification = DB.notificacoes.find(item => item.id === notificationId);
+      if (!notification) return;
+      notification.lida = true;
+      await saveDB();
+      renderNotifBell();
+    }
+
+    async function markAllNotificationsRead() {
+      const usuario = getUsuarioLogado();
+      if (!usuario) return;
+      DB.notificacoes.filter(item => item.userId === usuario.id).forEach(item => { item.lida = true; });
+      await saveDB();
+      renderNotifBell();
     }
 
     function renderFeaturedReviews() {
@@ -2667,6 +3571,7 @@
       renderLibrarianQuote();
       if (document.getElementById('sugestoesList')) renderSugestoesUsuario();
       if (document.getElementById('favoritosList')) renderFavoritos();
+      if (document.getElementById('supportList')) renderSuporteUsuario();
       if (document.getElementById('livroSemana')) renderLivroSemana();
     }
 
@@ -2695,11 +3600,11 @@
         <button class="close" data-close="bookOverlay">×</button>
         <div class="book-spread">
           <div class="book-page-left">
-            <img src="${capaDoLivro(book)}" alt="Capa de ${escapeHTML(book.titulo)}">
+            <img src="${escapeHTML(capaDoLivro(book))}" data-modal-book-image="${escapeHTML(book.id)}" alt="Capa de ${escapeHTML(book.titulo)}" loading="lazy">
           </div>
           <div class="book-page-right">
             <p class="eyebrow">${escapeHTML(book.genero)}</p>
-            <h2>${escapeHTML(book.titulo)}</h2>
+            <h2 id="bookModalTitle">${escapeHTML(book.titulo)}</h2>
             <p style="font-style:italic; color:var(--ink-soft);">${escapeHTML(book.autor)}</p>
             <div style="margin:10px 0;">
               <span class="stars" style="font-size:1.1rem;">${book.avaliacoes.length ? starString(media) : 'sem avaliações ainda'}</span>
@@ -2758,6 +3663,11 @@
       `;
 
       overlay.classList.add('show');
+      document.body.classList.add('modal-open');
+      const modalImage = modal.querySelector('[data-modal-book-image]');
+      if (modalImage) modalImage.addEventListener('error', () => { modalImage.src = capaPadrao(book); }, { once: true });
+      const modalClose = modal.querySelector('[data-close="bookOverlay"]');
+      if (modalClose) modalClose.focus();
 
       const loanBtn = document.getElementById('loanBtn');
       if (loanBtn) loanBtn.addEventListener('click', () => emprestarLivro(bookId));
@@ -2788,6 +3698,8 @@
         openAuthModal('login');
         return;
       }
+      const book = findBook(bookId);
+      if (!book || book.archived) return;
       const idx = DB.favoritos.findIndex(f => f.bookId === bookId && f.userId === usuario.id);
       if (idx >= 0) DB.favoritos.splice(idx, 1);
       else DB.favoritos.push({ userId: usuario.id, bookId });
@@ -2855,11 +3767,11 @@
       container.innerHTML = `
         <h4 style="margin-top:16px;">📚 Talvez você também goste</h4>
         <div class="mini-grid">
-          ${candidatos.map(b => `
-            <div class="book-card" data-book-id="${b.id}" style="cursor:pointer;">
+           ${candidatos.map(b => `
+            <div class="book-card" data-book-id="${escapeHTML(b.id)}" style="cursor:pointer;">
               <div class="book-stage">
-                <div class="book" style="aspect-ratio:2/3;">
-                  <div class="book-cover"><img src="${capaDoLivro(b)}" alt="${escapeHTML(b.titulo)}"></div>
+                <div class="book" style="aspect-ratio:2/3;" tabindex="0" role="button" aria-label="Abrir ${escapeHTML(b.titulo)}">
+                  <div class="book-cover"><img src="${escapeHTML(capaDoLivro(b))}" alt="${escapeHTML(b.titulo)}" loading="lazy"></div>
                 </div>
               </div>
               <div class="book-caption">
@@ -2872,12 +3784,43 @@
       `;
       container.querySelectorAll('.book-card').forEach(el => {
         el.addEventListener('click', () => openBook(el.dataset.bookId));
+        el.querySelector('.book')?.addEventListener('keydown', event => {
+          if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openBook(el.dataset.bookId); }
+        });
       });
+      container.querySelectorAll('img').forEach(image => image.addEventListener('error', () => {
+        const book = findBook(image.closest('.book-card')?.dataset.bookId);
+        image.src = capaPadrao(book);
+      }, { once: true }));
     }
 
     // ============================================================
     // ALUGUEL, DEVOLUÇÃO, RESERVA
     // ============================================================
+    function diasDeAtraso(loan, now = new Date()) {
+      if (!loan || !loan.prazo) return 0;
+      const prazo = new Date(loan.prazo);
+      if (Number.isNaN(prazo.getTime()) || now <= prazo) return 0;
+      return Math.ceil((now - prazo) / (1000 * 60 * 60 * 24));
+    }
+
+    function calcularMultaEstimada(loan, now = new Date()) {
+      if (!loan || loan.status !== 'ativo') return 0;
+      return diasDeAtraso(loan, now) * Math.max(0, Number(DB.settings.multaPorDia) || 0);
+    }
+
+    function resumoPrazo(loan, now = new Date()) {
+      if (!loan || !loan.prazo) return 'Prazo não informado';
+      const prazo = new Date(loan.prazo);
+      if (Number.isNaN(prazo.getTime())) return 'Prazo inválido';
+      const atraso = diasDeAtraso(loan, now);
+      if (atraso > 0) return `Atrasado há ${atraso} dia${atraso === 1 ? '' : 's'}`;
+      const dias = Math.ceil((prazo - now) / (1000 * 60 * 60 * 24));
+      if (dias <= 0) return 'Vence hoje';
+      if (dias === 1) return 'Vence amanhã';
+      return `Vence em ${dias} dias`;
+    }
+
     async function emprestarLivro(bookId) {
       const usuario = getUsuarioLogado();
       if (!usuario) {
@@ -2886,25 +3829,27 @@
         return;
       }
 
-      const book = DB.books.find(b => b.id === bookId);
-      if (!book) return;
+      const book = findBook(bookId);
+      if (!book || book.archived || book.status === 'arquivado') return;
       if (book.estoqueDisp <= 0) { showToast('Este livro não está disponível.'); return; }
+      if (usuario.bloqueado) { showToast('Sua conta está bloqueada. Procure a biblioteca.'); return; }
       if (DB.loans.some(l => l.bookId === bookId && l.userId === usuario.id && l.status === 'ativo')) {
         showToast('Você já possui este livro alugado.');
         return;
       }
       const ativos = DB.loans.filter(l => l.userId === usuario.id && l.status === 'ativo');
-      if (ativos.length >= LIMITE_LIVROS_POR_USUARIO) {
-        showToast(`Limite de ${LIMITE_LIVROS_POR_USUARIO} livros atingido.`);
+      const limite = Number(DB.settings.limiteLivros) > 0 ? Number(DB.settings.limiteLivros) : LIMITE_LIVROS_POR_USUARIO;
+      if (ativos.length >= limite) {
+        showToast(`Limite de ${limite} livros atingido.`);
         return;
       }
 
-      book.estoqueDisp -= 1;
+      book.estoqueDisp = Math.max(0, book.estoqueDisp - 1);
       const agora = new Date();
       const prazo = new Date(agora);
-      prazo.setDate(prazo.getDate() + (DB.settings.prazoDias || 14));
+      prazo.setDate(prazo.getDate() + Math.max(1, Number(DB.settings.prazoDias) || 14));
 
-      DB.loans.unshift({
+      const loan = {
         id: 'loan_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7),
         bookId,
         userId: usuario.id,
@@ -2913,10 +3858,12 @@
         prazo: prazo.toISOString(),
         dataDevolucao: null,
         multa: 0
-      });
+      };
+      DB.loans.unshift(loan);
 
       await addTransaction('emprestimo', bookId, usuario.id, 0);
-      await notificarUsuario(usuario.id, `📚 Você alugou "${book.titulo}". Devolver até ${fmtDataCurta(prazo)}.`);
+      await notificarUsuario(usuario.id, `Você alugou "${book.titulo}". Devolver até ${fmtDataCurta(prazo)}.`, 'emprestimo', loan.id, 'normal');
+      await registrarAuditoria('emprestimo', 'loan', loan.id, null, loan);
       await saveDB();
       showToast(`✅ "${book.titulo}" alugado com sucesso!`);
       closeOverlay('bookOverlay');
@@ -2924,32 +3871,34 @@
       renderAdminStats();
     }
 
-    async function devolverLivro(loanId) {
+    async function devolverLivro(loanId, options = {}) {
       const loan = DB.loans.find(l => l.id === loanId);
-      if (!loan || loan.status !== 'ativo') return;
+      if (!loan || loan.status !== 'ativo') return false;
+      if (!options.silent && !window.confirm('Confirmar devolução deste livro?')) return false;
 
-      const book = DB.books.find(b => b.id === loan.bookId);
+      const book = findBook(loan.bookId);
+      const antes = JSON.parse(JSON.stringify(loan));
       const agora = new Date();
-      const prazo = new Date(loan.prazo);
-      let multa = 0;
-      if (agora > prazo) {
-        const diasAtraso = Math.ceil((agora - prazo) / (1000 * 60 * 60 * 24));
-        multa = diasAtraso * (DB.settings.multaPorDia || 1);
-      }
+      const multa = calcularMultaEstimada(loan, agora);
+      const diasAtraso = diasDeAtraso(loan, agora);
 
       loan.status = 'devolvido';
       loan.dataDevolucao = agora.toISOString();
       loan.multa = multa;
-      if (book) book.estoqueDisp = Math.min(book.estoqueTotal, book.estoqueDisp + 1);
+      loan.diasAtraso = diasAtraso;
+      if (book) book.estoqueDisp = Math.min(Math.max(0, Number(book.estoqueTotal) || 0),
+        Math.max(0, Number(book.estoqueDisp) || 0) + 1);
 
       await addTransaction('devolucao', loan.bookId, loan.userId, multa);
-      const msg = multa > 0 ? `📕 Devolvido com multa de ${fmtMoeda(multa)}.` : '📕 Devolvido com sucesso!';
-      await notificarUsuario(loan.userId, msg);
+      const msg = multa > 0 ? `Devolvido com multa de ${fmtMoeda(multa)}.` : 'Devolvido com sucesso!';
+      await notificarUsuario(loan.userId, msg, multa > 0 ? 'multa' : 'devolucao', loan.id, multa > 0 ? 'alta' : 'normal');
+      await registrarAuditoria('devolucao', 'loan', loan.id, antes, loan);
       await saveDB();
       await verificarReservas(loan.bookId);
       showToast(msg);
       renderAll();
-      renderAdminStats();
+      renderAdmin();
+      return true;
     }
 
     async function reservarLivro(bookId) {
@@ -2959,59 +3908,112 @@
         openAuthModal('login');
         return;
       }
-      const book = DB.books.find(b => b.id === bookId);
-      if (!book) return;
+      const book = findBook(bookId);
+      if (!book || book.archived || book.status === 'arquivado') return;
+      if (usuario.bloqueado) { showToast('Sua conta está bloqueada.'); return; }
       if (book.estoqueDisp > 0) { showToast('Este livro já está disponível.'); return; }
-      if (DB.reservas.some(r => r.bookId === bookId && r.userId === usuario.id && r.status === 'ativa')) {
+      if (DB.reservas.some(r => r.bookId === bookId && r.userId === usuario.id && ['ativa', 'notificada'].includes(r.status))) {
         showToast('Você já reservou este livro.');
         return;
       }
-      DB.reservas.push({
+      const reserva = {
         id: 'res_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7),
         bookId,
         userId: usuario.id,
         data: new Date().toISOString(),
-        status: 'ativa'
-      });
+        status: 'ativa',
+        posicao: reservasAtivas(bookId).filter(r => r.status === 'ativa').length + 1,
+        notifiedAt: null,
+        retiradaAte: null
+      };
+      DB.reservas.push(reserva);
       await addTransaction('reserva', bookId, usuario.id, 0);
-      await notificarUsuario(usuario.id, `🔔 Reserva para "${book.titulo}" confirmada.`);
+      await notificarUsuario(usuario.id, `Reserva para "${book.titulo}" confirmada. Posição na fila: ${reserva.posicao}.`, 'reserva', reserva.id, 'normal');
+      await registrarAuditoria('reserva', 'reserva', reserva.id, null, reserva);
       await saveDB();
       showToast(`✅ "${book.titulo}" reservado.`);
       openBook(bookId);
     }
 
     async function verificarReservas(bookId) {
-      const fila = DB.reservas.filter(r => r.bookId === bookId && r.status === 'ativa').sort((a, b) => new Date(a.data) -
-        new Date(b.data));
+      const fila = DB.reservas.filter(r => r.bookId === bookId && r.status === 'ativa')
+        .sort((a, b) => new Date(a.data) - new Date(b.data));
       if (fila.length === 0) return;
       const proximo = fila[0];
+      const agora = new Date();
       proximo.status = 'notificada';
-      const book = DB.books.find(b => b.id === bookId);
-      await notificarUsuario(proximo.userId, `📢 "${book ? book.titulo : 'O livro'}" está disponível para aluguel!`);
+      proximo.notifiedAt = agora.toISOString();
+      proximo.retiradaAte = new Date(agora.getTime() + 3 * 24 * 60 * 60 * 1000).toISOString();
+      const book = findBook(bookId);
+      await notificarUsuario(proximo.userId, `"${book ? book.titulo : 'O livro'}" está disponível para você. Retire até ${fmtDataCurta(proximo.retiradaAte)}.`, 'reserva_disponivel', proximo.id, 'alta');
+      await registrarAuditoria('reserva_disponivel', 'reserva', proximo.id, null, proximo);
       await saveDB();
     }
 
-    async function notificarUsuario(userId, mensagem) {
-      DB.notificacoes.unshift({
+    async function cancelReserva(reservaId, options = {}) {
+      const reserva = DB.reservas.find(item => item.id === reservaId);
+      if (!reserva || ['cancelada', 'atendida'].includes(reserva.status)) return false;
+      if (!options.silent && !window.confirm('Cancelar esta reserva?')) return false;
+      const antes = JSON.parse(JSON.stringify(reserva));
+      reserva.status = 'cancelada';
+      reserva.canceladaEm = new Date().toISOString();
+      await registrarAuditoria('cancelar_reserva', 'reserva', reserva.id, antes, reserva);
+      await saveDB();
+      showToast('Reserva cancelada.');
+      renderAdmin();
+      return true;
+    }
+
+    async function notificarUsuario(userId, mensagem, tipo = 'aviso', referenciaId = null, prioridade = 'normal') {
+      if (!userId || !mensagem) return null;
+      if (referenciaId && DB.notificacoes.some(item => item.userId === userId && item.tipo === tipo && item.referenciaId === referenciaId)) {
+        return null;
+      }
+      const notificacao = {
         id: 'notif_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7),
         userId,
         mensagem,
+        tipo,
+        referenciaId,
+        prioridade,
         data: new Date().toISOString(),
         lida: false
-      });
+      };
+      DB.notificacoes.unshift(notificacao);
+      DB.notificacoes = DB.notificacoes.slice(0, 300);
       await saveDB();
       renderNotifBell();
+      return notificacao;
+    }
+
+    async function verificarPrazos() {
+      const agora = new Date();
+      for (const loan of DB.loans.filter(item => item.status === 'ativo' && item.prazo)) {
+        const prazo = new Date(loan.prazo);
+        if (Number.isNaN(prazo.getTime())) continue;
+        const dias = Math.ceil((prazo - agora) / (1000 * 60 * 60 * 24));
+        let tipo = null;
+        if (dias <= 0) tipo = 'atraso';
+        else if ([1, 3, 7].includes(dias)) tipo = `prazo_${dias}`;
+        if (!tipo) continue;
+        const livro = findBook(loan.bookId);
+        const mensagem = dias <= 0
+          ? `"${livro ? livro.titulo : 'Livro'}" está atrasado. Multa estimada: ${fmtMoeda(calcularMultaEstimada(loan, agora))}.`
+          : `"${livro ? livro.titulo : 'Livro'}" ${dias === 1 ? 'vence amanhã' : `vence em ${dias} dias`}.`;
+        await notificarUsuario(loan.userId, mensagem, tipo, loan.id, dias <= 0 ? 'alta' : 'normal');
+      }
     }
 
     // ============================================================
     // AUTENTICAÇÃO
     // ============================================================
-    function isGmail(email) {
-      return /^[^\s@]+@gmail\.com$/i.test((email || '').trim());
+    function isValidEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i.test((email || '').trim());
     }
 
     async function handleLogin(email, senha) {
-      const user = DB.users.find(u => u.email === email);
+      const normalizedEmail = (email || '').trim().toLowerCase();
+      const user = DB.users.find(u => (u.email || '').toLowerCase() === normalizedEmail);
       if (!user) return { success: false, message: 'E-mail não encontrado.' };
       if (user.bloqueado) return { success: false, message: 'Sua conta está bloqueada.' };
       const ok = await verifyPassword(senha, user.senhaHash);
@@ -3023,9 +4025,11 @@
     }
 
     async function handleSignup(nome, email, senha) {
-      if (DB.users.find(u => u.email === email)) return { success: false, message: 'E-mail já cadastrado.' };
+      const normalizedEmail = (email || '').trim().toLowerCase();
+      if (!isValidEmail(normalizedEmail)) return { success: false, message: 'Informe um e-mail válido.' };
+      if (DB.users.find(u => (u.email || '').toLowerCase() === normalizedEmail)) return { success: false, message: 'E-mail já cadastrado.' };
       const hash = await hashPassword(senha);
-      const user = { id: 'u' + Date.now() + '_' + Math.random().toString(36).slice(2, 7), nome, email, senhaHash: hash,
+      const user = { id: 'u' + Date.now() + '_' + Math.random().toString(36).slice(2, 7), nome: nome.trim(), email: normalizedEmail, senhaHash: hash,
         bloqueado: false, criadoEm: new Date().toISOString() };
       DB.users.push(user);
       await saveDB();
@@ -3044,7 +4048,7 @@
       document.getElementById('loginFields').style.display = isLogin ? 'block' : 'none';
       document.getElementById('signupFields').style.display = isLogin ? 'none' : 'block';
       document.getElementById('authTitle').textContent = isLogin ? 'Entrar na sua conta' : 'Criar sua conta';
-      overlay.classList.add('show');
+      openOverlay('authOverlay');
     }
 
     function initAuth() {
@@ -3069,11 +4073,11 @@
         const email = document.getElementById('loginEmail').value.trim().toLowerCase();
         const senha = document.getElementById('loginSenha').value;
         const err = document.getElementById('loginAuthErr');
-        if (!isGmail(email)) { err.textContent = 'Use um e-mail @gmail.com válido.';
+        if (!isValidEmail(email)) { err.textContent = 'Informe um e-mail válido.';
           err.style.display = 'block'; return; }
         const result = await handleLogin(email, senha);
         if (result.success) {
-          document.getElementById('authOverlay').classList.remove('show');
+          closeOverlay('authOverlay');
           if (pendingAction) {
             const { type, bookId } = pendingAction;
             pendingAction = null;
@@ -3094,13 +4098,13 @@
         const email = document.getElementById('signupEmail').value.trim().toLowerCase();
         const senha = document.getElementById('signupSenha').value;
         const err = document.getElementById('signupAuthErr');
-        if (!nome || !email || senha.length < 4) { err.textContent = 'Preencha todos os campos (senha mín. 4).';
+        if (!nome || !email || senha.length < 8) { err.textContent = 'Preencha todos os campos (senha mín. 8 caracteres).';
           err.style.display = 'block'; return; }
-        if (!isGmail(email)) { err.textContent = 'Use um e-mail @gmail.com válido.';
+        if (!isValidEmail(email)) { err.textContent = 'Informe um e-mail válido.';
           err.style.display = 'block'; return; }
         const result = await handleSignup(nome, email, senha);
         if (result.success) {
-          document.getElementById('authOverlay').classList.remove('show');
+          closeOverlay('authOverlay');
           if (pendingAction) {
             const { type, bookId } = pendingAction;
             pendingAction = null;
@@ -3120,63 +4124,122 @@
     // ============================================================
     // ADMIN
     // ============================================================
+    const ADMIN_PANEL_LABELS = {
+      painel: 'Visão geral', estoque: 'Estoque', novo: 'Adicionar livro', transacoes: 'Aluguéis', reservas: 'Reservas',
+      usuarios: 'Usuários', avaliacoes: 'Avaliações', sugestoes: 'Sugestões', suporte: 'Suporte', procurados: 'Mais procurados',
+      config: 'Configurações', pesquisa: 'Pesquisa', auditoria: 'Auditoria'
+    };
+
+    function setAdminPanel(panelId) {
+      if (!Object.values(ADMIN_GROUPS).some(panels => panels.includes(panelId))) return;
+      document.querySelectorAll('.admin-panel').forEach(panel => panel.classList.toggle('show', panel.id === 'tab-' + panelId));
+      document.querySelectorAll('#adminQuickLinks button').forEach(button => button.classList.toggle('active', button.dataset.tab === panelId));
+      if (panelId === 'painel') renderDashboardCharts();
+      if (panelId === 'suporte') renderSuporteAdmin();
+    }
+
+    function setAdminGroup(groupId, focusPanel = true) {
+      if (!ADMIN_GROUPS[groupId]) return;
+      activeAdminGroup = groupId;
+      document.querySelectorAll('#adminTabs [data-group]').forEach(button => {
+        const active = button.dataset.group === groupId;
+        button.classList.toggle('active', active);
+        button.setAttribute('aria-selected', String(active));
+      });
+      const quickLinks = document.getElementById('adminQuickLinks');
+      if (quickLinks) {
+        quickLinks.innerHTML = ADMIN_GROUPS[groupId].map(panelId => `<button type="button" data-tab="${panelId}" class="${focusPanel && panelId === ADMIN_GROUPS[groupId][0] ? 'active' : ''}">${ADMIN_PANEL_LABELS[panelId]}</button>`).join('');
+        quickLinks.querySelectorAll('[data-tab]').forEach(button => {
+          button.addEventListener('click', () => setAdminPanel(button.dataset.tab));
+        });
+      }
+      if (focusPanel) setAdminPanel(ADMIN_GROUPS[groupId][0]);
+    }
+
     function renderAdmin() {
+      renderAdminStats();
       renderAdminStats();
       renderEstoque();
       renderUsuarios();
       renderProcurados();
       renderAvaliacoesAdmin();
       renderTransacoes();
+      renderEmprestimosAdmin();
+      renderReservasAdmin();
       renderSugestoesAdmin();
+      renderSuporteAdmin();
+      renderAuditoriaAdmin();
       renderAlertasAtraso();
       carregarEditBookSelect();
       carregarLivroSemanaConfig();
-      renderDashboardCharts();
+      setAdminGroup(activeAdminGroup, true);
     }
 
     function renderAdminStats() {
       const totalVisitas = DB.visits || 0;
-      const totalLivros = DB.books.length;
+      const totalLivros = DB.books.filter(book => !book.archived && book.status !== 'arquivado').length;
       const totalUsuarios = DB.users.length;
       const totalAlugueis = DB.loans.filter(l => l.status === 'ativo').length;
       const totalAtrasados = DB.loans.filter(l => l.status === 'ativo' && l.prazo && new Date(l.prazo) < new Date())
         .length;
-      const totalMultas = DB.transactions.filter(t => t.tipo === 'devolucao').reduce((s, t) => s + (t.multa || 0), 0);
-      const totalReservas = DB.reservas.filter(r => r.status === 'ativa').length;
+      const totalMultas = DB.loans.reduce((s, loan) => s + calcularMultaEstimada(loan), 0) +
+        DB.transactions.filter(t => t.tipo === 'devolucao').reduce((s, t) => s + (t.multa || 0), 0);
+      const totalReservas = DB.reservas.filter(r => ['ativa', 'notificada'].includes(r.status)).length;
       const totalAvaliacoes = DB.books.reduce((s, b) => s + b.avaliacoes.length, 0);
       const totalSugestoes = DB.sugestoes.length;
 
       document.getElementById('adminStats').innerHTML = `
-        <div class="stat"><div class="num">${totalLivros}</div><div class="label">📚 Livros</div></div>
-        <div class="stat"><div class="num">${totalUsuarios}</div><div class="label">👥 Usuários</div></div>
-        <div class="stat"><div class="num">${totalAlugueis}</div><div class="label">📖 Aluguéis ativos</div></div>
-        <div class="stat"><div class="num">${totalAtrasados}</div><div class="label">⚠️ Atrasados</div></div>
-        <div class="stat"><div class="num">${totalReservas}</div><div class="label">🔄 Reservas</div></div>
-        <div class="stat"><div class="num">${fmtMoeda(totalMultas)}</div><div class="label">💰 Multas</div></div>
-        <div class="stat"><div class="num">${totalAvaliacoes}</div><div class="label">⭐ Avaliações</div></div>
-        <div class="stat"><div class="num">${totalSugestoes}</div><div class="label">📝 Sugestões</div></div>
-        <div class="stat"><div class="num">${totalVisitas}</div><div class="label">👁️ Visitas</div></div>
+        <div class="stat"><div class="num">${totalLivros}</div><div class="label">Livros ativos</div></div>
+        <div class="stat"><div class="num">${totalUsuarios}</div><div class="label">Usuários</div></div>
+        <div class="stat"><div class="num">${totalAlugueis}</div><div class="label">Aluguéis ativos</div></div>
+        <div class="stat"><div class="num">${totalAtrasados}</div><div class="label">Atrasados</div></div>
+        <div class="stat"><div class="num">${totalReservas}</div><div class="label">Reservas</div></div>
+        <div class="stat"><div class="num">${fmtMoeda(totalMultas)}</div><div class="label">Multas estimadas</div></div>
+        <div class="stat"><div class="num">${totalAvaliacoes}</div><div class="label">Avaliações</div></div>
+        <div class="stat"><div class="num">${totalSugestoes}</div><div class="label">Sugestões</div></div>
+        <div class="stat"><div class="num">${totalVisitas}</div><div class="label">Visitas</div></div>
       `;
     }
 
     function renderEstoque() {
       const tbody = document.getElementById('estoqueBody');
-      tbody.innerHTML = DB.books.map(b => {
-        const alugados = DB.loans.filter(l => l.bookId === b.id && l.status === 'ativo').length;
-        const reservados = DB.reservas.filter(r => r.bookId === b.id && r.status === 'ativa').length;
-        return `<tr>
-          <td>${escapeHTML(b.titulo)}</td>
+      if (!tbody) return;
+      const books = DB.books.slice().sort((a, b) => Number(a.archived) - Number(b.archived) ||
+        a.titulo.localeCompare(b.titulo, 'pt-BR'));
+      tbody.innerHTML = books.map(b => {
+        const estoque = resumoEstoque(b);
+        const arquivado = b.archived || b.status === 'arquivado';
+        const status = arquivado ? 'Arquivado' : estoque.disponivel > 0 ? 'Disponível' : 'Indisponível';
+        return `<tr class="${arquivado ? 'is-archived' : ''}">
+          <td><strong>${escapeHTML(b.titulo)}</strong><br><small>${escapeHTML(b.autor || '—')}</small></td>
           <td>${escapeHTML(b.isbn || '—')}</td>
-          <td>${escapeHTML(b.genero)}</td>
-          <td>${b.estoqueTotal}</td>
-          <td>${b.estoqueDisp}</td>
-          <td>${alugados}</td>
-          <td>${reservados}</td>
-          <td><button class="btn small" data-edit-book="${b.id}">✏️</button></td>
+          <td>${escapeHTML(b.genero || 'Geral')}</td>
+          <td>${estoque.total}</td>
+          <td>${estoque.disponivel}</td>
+          <td>${estoque.emprestado}</td>
+          <td>${estoque.reservado}</td>
+          <td>
+            <div class="admin-action-row">
+              <button class="btn small" data-view-book="${escapeHTML(b.id)}" aria-label="Visualizar ${escapeHTML(b.titulo)}">Ver</button>
+              <button class="btn small ghost" data-edit-book="${escapeHTML(b.id)}">Editar</button>
+              <button class="btn small ghost" data-duplicate-book="${escapeHTML(b.id)}">Duplicar</button>
+              <button class="btn small ghost" data-archive-book="${escapeHTML(b.id)}">${arquivado ? 'Desarquivar' : 'Arquivar'}</button>
+            </div>
+            <small class="field-hint">${status}</small>
+          </td>
         </tr>`;
-      }).join('');
+      }).join('') || '<tr><td colspan="8" class="empty">Nenhum livro cadastrado.</td></tr>';
       tbody.querySelectorAll('[data-edit-book]').forEach(btn => {
         btn.onclick = () => carregarLivroParaEdicao(btn.dataset.editBook);
+      });
+      tbody.querySelectorAll('[data-view-book]').forEach(btn => {
+        btn.onclick = () => openBook(btn.dataset.viewBook);
+      });
+      tbody.querySelectorAll('[data-duplicate-book]').forEach(btn => {
+        btn.onclick = () => duplicarLivro(btn.dataset.duplicateBook);
+      });
+      tbody.querySelectorAll('[data-archive-book]').forEach(btn => {
+        btn.onclick = () => alternarArquivamentoLivro(btn.dataset.archiveBook);
       });
     }
 
@@ -3210,13 +4273,19 @@
     }
 
     async function toggleUserBlock(userId) {
-      const user = DB.users.find(u => u.id === userId);
+      const user = findUser(userId);
       if (!user) return;
-      user.bloqueado = !user.bloqueado;
+      const novoStatus = !user.bloqueado;
+      if (!window.confirm(`${novoStatus ? 'Bloquear' : 'Desbloquear'} ${user.nome}?`)) return;
+      const antes = JSON.parse(JSON.stringify(user));
+      user.bloqueado = novoStatus;
+      await registrarAuditoria(novoStatus ? 'bloquear' : 'desbloquear', 'user', user.id, antes, user);
+      if (novoStatus) await notificarUsuario(user.id, 'Sua conta foi bloqueada pela biblioteca. Procure a equipe para mais informações.', 'conta_bloqueada', user.id, 'alta');
       await saveDB();
       showToast(`Usuário ${user.bloqueado ? 'bloqueado' : 'desbloqueado'}.`);
       renderUsuarios();
       renderAdminStats();
+      renderAuditoriaAdmin();
     }
 
     function renderProcurados() {
@@ -3238,12 +4307,132 @@
     }
 
     function renderTransacoes() {
-      document.getElementById('transBody').innerHTML = DB.transactions.slice(0, 50).map(t => {
-        const book = DB.books.find(b => b.id === t.bookId);
-        const user = DB.users.find(u => u.id === t.userId);
-        const label = { emprestimo: 'Aluguel', devolucao: 'Devolução' }[t.tipo] || t.tipo;
-        return `<tr><td>${fmtData(t.data)}</td><td>${label}</td><td>${book ? escapeHTML(book.titulo) : '—'}</td><td>${user ? escapeHTML(user.nome) : '—'}</td><td>${t.multa ? fmtMoeda(t.multa) : '—'}</td></tr>`;
+      const body = document.getElementById('transBody');
+      if (!body) return;
+      body.innerHTML = DB.transactions.slice(0, 50).map(t => {
+        const book = findBook(t.bookId);
+        const user = findUser(t.userId);
+        const label = { emprestimo: 'Aluguel', devolucao: 'Devolução', reserva: 'Reserva' }[t.tipo] || t.tipo;
+        return `<tr><td>${fmtData(t.data)}</td><td>${escapeHTML(label)}</td><td>${book ? escapeHTML(book.titulo) : '—'}</td><td>${user ? escapeHTML(user.nome) : '—'}</td><td>${t.multa ? fmtMoeda(t.multa) : '—'}</td></tr>`;
       }).join('') || '<tr><td colspan="5" class="empty">Nenhuma movimentação.</td></tr>';
+    }
+
+    function renderEmprestimosAdmin() {
+      const container = document.getElementById('adminLoansList');
+      if (!container) return;
+      const ativos = DB.loans.filter(loan => loan.status === 'ativo')
+        .sort((a, b) => new Date(a.prazo) - new Date(b.prazo));
+      if (!ativos.length) {
+        container.innerHTML = '<div class="empty">Nenhum empréstimo ativo.</div>';
+        return;
+      }
+      container.innerHTML = `<h3 style="font-size:1rem; margin-bottom:8px;">Empréstimos em aberto</h3>` + ativos.map(loan => {
+        const book = findBook(loan.bookId);
+        const user = findUser(loan.userId);
+        const atraso = diasDeAtraso(loan);
+        const multa = calcularMultaEstimada(loan);
+        return `<div class="admin-list-card ${atraso ? 'is-overdue' : ''}">
+          <h4>${escapeHTML(book ? book.titulo : 'Livro removido')}</h4>
+          <div class="admin-list-meta">
+            <span>Leitor: <strong>${escapeHTML(user ? user.nome : 'Usuário removido')}</strong></span>
+            <span>Retirada: ${fmtDataCurta(loan.data)}</span>
+            <span>${escapeHTML(resumoPrazo(loan))}</span>
+            <span>Multa estimada: ${fmtMoeda(multa)}</span>
+          </div>
+          <div class="admin-action-row" style="margin-top:8px;">
+            <button class="btn small" data-return-loan="${escapeHTML(loan.id)}">Registrar devolução</button>
+            ${user ? `<button class="btn small ghost" data-admin-user="${escapeHTML(user.id)}">Ver usuário</button>` : ''}
+          </div>
+        </div>`;
+      }).join('');
+      container.querySelectorAll('[data-return-loan]').forEach(button => {
+        button.onclick = () => devolverLivro(button.dataset.returnLoan);
+      });
+      container.querySelectorAll('[data-admin-user]').forEach(button => {
+        button.onclick = () => {
+          const tab = document.querySelector('#adminTabs button[data-tab="usuarios"]');
+          if (tab) tab.click();
+          const search = document.getElementById('adminSearchUser');
+          const user = findUser(button.dataset.adminUser);
+          if (search && user) { search.value = user.email; renderUsuarios(); }
+        };
+      });
+    }
+
+    function renderReservasAdmin() {
+      const container = document.getElementById('reservasAdminList');
+      if (!container) return;
+      const reservas = DB.reservas.filter(reserva => !['cancelada', 'atendida'].includes(reserva.status))
+        .sort((a, b) => new Date(a.data) - new Date(b.data));
+      if (!reservas.length) {
+        container.innerHTML = '<div class="empty">Nenhuma reserva ativa.</div>';
+        return;
+      }
+      const posicoes = {};
+      container.innerHTML = reservas.map(reserva => {
+        const book = findBook(reserva.bookId);
+        const user = findUser(reserva.userId);
+        const key = reserva.bookId;
+        posicoes[key] = (posicoes[key] || 0) + 1;
+        const posicao = reserva.status === 'notificada' ? 'Disponível para retirada' : `Posição ${posicoes[key]}`;
+        return `<div class="admin-list-card">
+          <h4>${escapeHTML(book ? book.titulo : 'Livro removido')}</h4>
+          <div class="admin-list-meta"><span>Usuário: ${escapeHTML(user ? user.nome : 'Usuário removido')}</span><span>Solicitada: ${fmtData(reserva.data)}</span><span>${escapeHTML(posicao)}</span>${reserva.retiradaAte ? `<span>Retirar até: ${fmtDataCurta(reserva.retiradaAte)}</span>` : ''}</div>
+          <div class="admin-action-row" style="margin-top:8px;"><button class="btn small ghost" data-cancel-reservation="${escapeHTML(reserva.id)}">Cancelar reserva</button></div>
+        </div>`;
+      }).join('');
+      container.querySelectorAll('[data-cancel-reservation]').forEach(button => {
+        button.onclick = () => cancelReserva(button.dataset.cancelReservation);
+      });
+    }
+
+    function renderAuditoriaAdmin() {
+      const container = document.getElementById('auditoriaAdminList');
+      if (!container) return;
+      const logs = (DB.auditLog || []).slice(0, 80);
+      if (!logs.length) {
+        container.innerHTML = '<div class="empty">Nenhum registro de auditoria.</div>';
+        return;
+      }
+      container.innerHTML = logs.map(log => `<div class="admin-list-card">
+        <div class="admin-list-meta"><strong>${escapeHTML(log.acao)}</strong><span>${escapeHTML(log.entidade || 'registro')} ${escapeHTML(log.entidadeId || '')}</span><span>${fmtData(log.data)}</span></div>
+        <div style="font-size:.82rem; color:var(--ink-soft); margin-top:4px;">Por ${escapeHTML(log.usuarioNome || 'Administrador local')}</div>
+      </div>`).join('');
+    }
+
+    async function duplicarLivro(bookId) {
+      const original = findBook(bookId);
+      if (!original) return;
+      const copy = JSON.parse(JSON.stringify(original));
+      copy.id = 'b' + Date.now() + '_' + Math.random().toString(36).slice(2, 6);
+      copy.titulo = `${copy.titulo} (cópia)`;
+      copy.estoqueTotal = 0;
+      copy.estoqueDisp = 0;
+      copy.avaliacoes = [];
+      copy.archived = false;
+      copy.status = 'ativo';
+      DB.books.push(copy);
+      await registrarAuditoria('duplicar', 'book', copy.id, null, copy);
+      await saveDB();
+      showToast('Livro duplicado como rascunho de estoque zero.');
+      renderAll();
+      renderAdmin();
+    }
+
+    async function alternarArquivamentoLivro(bookId) {
+      const book = findBook(bookId);
+      if (!book) return;
+      const arquivar = !(book.archived || book.status === 'arquivado');
+      if (arquivar && !window.confirm(`Arquivar "${book.titulo}"? O histórico será preservado.`)) return;
+      if (!arquivar && !window.confirm(`Desarquivar "${book.titulo}"?`)) return;
+      const antes = JSON.parse(JSON.stringify(book));
+      book.archived = arquivar;
+      book.status = arquivar ? 'arquivado' : 'ativo';
+      await registrarAuditoria(arquivar ? 'arquivar' : 'desarquivar', 'book', book.id, antes, book);
+      await saveDB();
+      showToast(arquivar ? 'Livro arquivado.' : 'Livro reativado.');
+      renderAll();
+      renderAdmin();
     }
 
     function renderAlertasAtraso() {
@@ -3390,12 +4579,15 @@
           <div><small>Enviado por ${escapeHTML(s.usuarioNome)} em ${fmtData(s.data)}</small></div>
           <div><em>Motivo:</em> ${escapeHTML(s.motivo || '—')}</div>
           ${s.obs ? `<div><em>Obs:</em> ${escapeHTML(s.obs)}</div>` : ''}
-          <div style="margin-top:6px;">
-            <span class="tag ${s.status === 'aceita' ? 'ativo' : s.status === 'recusada' ? 'atrasado' : ''}">${s.status || 'pendente'}</span>
-            ${s.motivoRecusa ? `<span style="margin-left:8px; color:var(--stamp);">Motivo: ${escapeHTML(s.motivoRecusa)}</span>` : ''}
+          <div style="margin-top:6px;" class="admin-action-row">
+            <span class="tag ${s.status === 'aceita' || s.status === 'adicionada' ? 'ativo' : s.status === 'recusada' ? 'atrasado' : ''}">${escapeHTML(s.status || 'pendente')}</span>
+            ${s.motivoRecusa ? `<span style="color:var(--stamp);">Motivo: ${escapeHTML(s.motivoRecusa)}</span>` : ''}
+            <select data-status-sug="${escapeHTML(s.id)}" aria-label="Atualizar status da sugestão">
+              ${['pendente', 'em_analise', 'aceita', 'recusada', 'adicionada'].map(status => `<option value="${status}" ${s.status === status ? 'selected' : ''}>${status.replace('_', ' ')}</option>`).join('')}
+            </select>
             ${s.status === 'pendente' ? `
-              <button class="btn small" data-aceitar-sug="${s.id}">Aceitar</button>
-              <button class="btn small ghost" data-recusar-sug="${s.id}">Recusar</button>
+              <button class="btn small" data-aceitar-sug="${escapeHTML(s.id)}">Aceitar</button>
+              <button class="btn small ghost" data-recusar-sug="${escapeHTML(s.id)}">Recusar</button>
             ` : ''}
           </div>
         </div>
@@ -3408,6 +4600,12 @@
           if (target) {
             e.stopPropagation();
             processarSugestao(target.dataset.aceitarSug, 'aceita');
+            return;
+          }
+          const statusSelect = e.target.closest('[data-status-sug]');
+          if (statusSelect) {
+            e.stopPropagation();
+            processarSugestao(statusSelect.dataset.statusSug, statusSelect.value);
             return;
           }
           const targetRecusar = e.target.closest('[data-recusar-sug]');
@@ -3423,31 +4621,58 @@
 
     async function processarSugestao(sugId, status, motivoRecusa) {
       const sugestao = DB.sugestoes.find(s => s.id === sugId);
-      if (!sugestao) return;
+      if (!sugestao || !['pendente', 'em_analise', 'aceita', 'recusada', 'adicionada'].includes(status)) return;
+      const antes = JSON.parse(JSON.stringify(sugestao));
       sugestao.status = status;
-      if (motivoRecusa) sugestao.motivoRecusa = motivoRecusa;
+      if (motivoRecusa !== undefined) sugestao.motivoRecusa = motivoRecusa;
+      const actor = getAdminActor();
+      sugestao.administradorId = actor.id;
+      sugestao.administradorNome = actor.nome;
+      sugestao.dataAtualizacao = new Date().toISOString();
+      await registrarAuditoria('atualizar_sugestao', 'sugestao', sugestao.id, antes, sugestao);
       await saveDB();
-      showToast(`Sugestão ${status === 'aceita' ? 'aceita' : 'recusada'}.`);
-      const user = DB.users.find(u => u.id === sugestao.usuarioId);
-      if (user) await notificarUsuario(user.id,
-        `Sua sugestão "${sugestao.titulo}" foi ${status === 'aceita' ? 'aceita' : 'recusada'}.${motivoRecusa ? ' Motivo: ' + motivoRecusa : ''}`
+      const statusLabel = status.replace('_', ' ');
+      showToast(`Sugestão marcada como ${statusLabel}.`);
+      const user = findUser(sugestao.usuarioId);
+      if (user && ['aceita', 'recusada', 'adicionada'].includes(status)) {
+        await notificarUsuario(user.id,
+          `Sua sugestão "${sugestao.titulo}" foi ${statusLabel}.${motivoRecusa ? ' Motivo: ' + motivoRecusa : ''}`,
+          `sugestao_${status}`, sugestao.id, status === 'recusada' ? 'normal' : 'alta'
         );
+      }
       renderSugestoesAdmin();
       renderAdminStats();
+      renderAuditoriaAdmin();
     }
 
     function carregarEditBookSelect() {
       const select = document.getElementById('editBookSelect');
-      select.innerHTML = '<option value="">— Escolha —</option>' + DB.books.map(b =>
-        `<option value="${b.id}">${escapeHTML(b.titulo)}</option>`).join('');
+      if (!select) return;
+      select.innerHTML = '<option value="">— Escolha —</option>' + DB.books
+        .slice().sort((a, b) => a.titulo.localeCompare(b.titulo, 'pt-BR')).map(b =>
+        `<option value="${escapeHTML(b.id)}">${escapeHTML(b.titulo)}${b.archived ? ' (arquivado)' : ''}</option>`).join('');
       select.onchange = () => {
         if (select.value) carregarLivroParaEdicao(select.value);
         else limparCamposEdicao();
       };
     }
 
+    function renderEditCover(url, status = '') {
+      const preview = document.getElementById('eCapaPreview');
+      const statusEl = document.getElementById('eCapaStatus');
+      if (!preview) return;
+      preview.src = url || capaPadrao(findBook(document.getElementById('saveEditBook')?.dataset.bookId));
+      preview.alt = url ? 'Prévia da nova capa' : 'Capa padrão do Lúmen';
+      if (statusEl) statusEl.textContent = status;
+      preview.onerror = () => {
+        const book = findBook(document.getElementById('saveEditBook')?.dataset.bookId);
+        preview.src = capaPadrao(book);
+        if (statusEl) statusEl.textContent = 'Não foi possível carregar esta imagem. Usando capa padrão.';
+      };
+    }
+
     function carregarLivroParaEdicao(bookId) {
-      const book = DB.books.find(b => b.id === bookId);
+      const book = findBook(bookId);
       if (!book) return;
       document.getElementById('eTitulo').value = book.titulo || '';
       document.getElementById('eAutor').value = book.autor || '';
@@ -3456,42 +4681,79 @@
       document.getElementById('eAno').value = book.ano || '';
       document.getElementById('eGenero').value = book.genero || '';
       document.getElementById('ePaginas').value = book.paginas || '';
+      document.getElementById('eIdioma').value = book.idioma || 'Português';
+      document.getElementById('eTraducao').value = book.traducao || '';
       document.getElementById('eSinopse').value = book.sinopse || '';
       document.getElementById('eEstoqueTotal').value = book.estoqueTotal || 0;
       document.getElementById('eEstoqueDisp').value = book.estoqueDisp || 0;
-      document.getElementById('eCapa').value = book.capa || '';
+      document.getElementById('eCapa').value = safeImageUrl(book.capa) || '';
+      editCapaDataUrl = null;
+      editCapaRemovida = false;
       document.getElementById('editBookSelect').value = bookId;
       document.getElementById('saveEditBook').dataset.bookId = bookId;
+      renderEditCover(capaDoLivro(book), book.capa ? 'Capa atual.' : 'Usando capa padrão.');
     }
 
     function limparCamposEdicao() {
-      ['eTitulo', 'eAutor', 'eIsbn', 'eEditora', 'eAno', 'eGenero', 'ePaginas', 'eSinopse', 'eEstoqueTotal',
-        'eEstoqueDisp', 'eCapa'
-      ].forEach(id => document.getElementById(id).value = '');
+      ['eTitulo', 'eAutor', 'eIsbn', 'eEditora', 'eAno', 'eGenero', 'ePaginas', 'eIdioma', 'eTraducao', 'eSinopse', 'eEstoqueTotal',
+        'eEstoqueDisp', 'eCapa'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+      editCapaDataUrl = null;
+      editCapaRemovida = false;
       document.getElementById('saveEditBook').dataset.bookId = '';
+      const preview = document.getElementById('eCapaPreview');
+      if (preview) preview.removeAttribute('src');
+      const status = document.getElementById('eCapaStatus');
+      if (status) status.textContent = '';
     }
 
     document.getElementById('saveEditBook').onclick = async () => {
-      const bookId = document.getElementById('saveEditBook').dataset.bookId;
+      const button = document.getElementById('saveEditBook');
+      const bookId = button.dataset.bookId;
       if (!bookId) { showToast('Selecione um livro.'); return; }
-      const book = DB.books.find(b => b.id === bookId);
+      const book = findBook(bookId);
       if (!book) return;
-      book.titulo = document.getElementById('eTitulo').value.trim() || book.titulo;
-      book.autor = document.getElementById('eAutor').value.trim() || book.autor;
-      book.isbn = document.getElementById('eIsbn').value.trim() || book.isbn;
-      book.editora = document.getElementById('eEditora').value.trim() || book.editora;
-      book.ano = document.getElementById('eAno').value.trim() || book.ano;
-      book.genero = document.getElementById('eGenero').value.trim() || book.genero;
-      book.paginas = document.getElementById('ePaginas').value.trim() || book.paginas;
-      book.sinopse = document.getElementById('eSinopse').value.trim() || book.sinopse;
-      const total = parseInt(document.getElementById('eEstoqueTotal').value, 10);
-      const disp = parseInt(document.getElementById('eEstoqueDisp').value, 10);
-      if (!isNaN(total) && total >= 0) book.estoqueTotal = total;
-      if (!isNaN(disp) && disp >= 0 && disp <= book.estoqueTotal) book.estoqueDisp = disp;
-      const capa = document.getElementById('eCapa').value.trim();
-      if (capa) book.capa = capa;
-      await saveDB();
-      showToast('✅ Livro atualizado.');
+      const isbn = normalizeISBN(document.getElementById('eIsbn').value.trim());
+      const ano = Number.parseInt(document.getElementById('eAno').value, 10);
+      const paginas = Number.parseInt(document.getElementById('ePaginas').value, 10);
+      const total = Number.parseInt(document.getElementById('eEstoqueTotal').value, 10);
+      const disp = Number.parseInt(document.getElementById('eEstoqueDisp').value, 10);
+      const capaUrl = document.getElementById('eCapa').value.trim();
+      if (!document.getElementById('eTitulo').value.trim() || !document.getElementById('eAutor').value.trim()) {
+        showToast('Título e autor são obrigatórios.'); return;
+      }
+      if (isbn && !isValidISBN(isbn)) { showToast('ISBN inválido.'); return; }
+      if (isbn && DB.books.some(item => item.id !== bookId && normalizeISBN(item.isbn) === isbn)) {
+        showToast('Já existe outro livro com este ISBN.'); return;
+      }
+      if (Number.isNaN(ano) || ano < 0 || ano > new Date().getFullYear() + 1) { showToast('Ano de publicação inválido.'); return; }
+      if (Number.isNaN(paginas) || paginas < 0 || Number.isNaN(total) || total < 0 || Number.isNaN(disp) || disp < 0 || disp > total) {
+        showToast('Verifique páginas e estoque: disponíveis não pode superar o total.'); return;
+      }
+      if (capaUrl && !safeImageUrl(capaUrl)) { showToast('URL de capa inválida. Use http ou https.'); return; }
+      const antes = JSON.parse(JSON.stringify(book));
+      button.disabled = true;
+      button.textContent = 'Salvando...';
+      book.titulo = document.getElementById('eTitulo').value.trim();
+      book.autor = document.getElementById('eAutor').value.trim();
+      book.isbn = isbn;
+      book.editora = document.getElementById('eEditora').value.trim();
+      book.ano = ano;
+      book.genero = document.getElementById('eGenero').value.trim() || 'Geral';
+      book.paginas = paginas;
+      book.idioma = document.getElementById('eIdioma').value.trim() || 'Português';
+      book.traducao = document.getElementById('eTraducao').value.trim() || null;
+      book.sinopse = document.getElementById('eSinopse').value.trim();
+      book.estoqueTotal = total;
+      book.estoqueDisp = disp;
+      if (editCapaDataUrl) book.capa = editCapaDataUrl;
+      else if (editCapaRemovida) book.capa = '';
+      else if (capaUrl) book.capa = safeImageUrl(capaUrl);
+      await registrarAuditoria('editar', 'book', book.id, antes, book);
+      const ok = await saveDB();
+      button.disabled = false;
+      button.textContent = 'Salvar alterações';
+      if (!ok) return;
+      showToast('Livro atualizado.');
       renderAll();
       renderAdmin();
     };
@@ -3499,21 +4761,36 @@
     document.getElementById('deleteBookBtn').onclick = async () => {
       const bookId = document.getElementById('saveEditBook').dataset.bookId;
       if (!bookId) { showToast('Selecione um livro.'); return; }
-      if (!confirm('Excluir este livro?')) return;
-      const idx = DB.books.findIndex(b => b.id === bookId);
+      const book = findBook(bookId);
+      if (!book) return;
+      if (hasBookHistory(bookId)) {
+        showToast('Este livro possui histórico e deve ser arquivado.');
+        await alternarArquivamentoLivro(bookId);
+        return;
+      }
+      if (!window.confirm(`Excluir "${book.titulo}"? Esta ação não poderá ser desfeita.`)) return;
+      const idx = DB.books.findIndex(item => item.id === bookId);
       if (idx >= 0) {
+        const antes = JSON.parse(JSON.stringify(DB.books[idx]));
         DB.books.splice(idx, 1);
+        await registrarAuditoria('excluir', 'book', bookId, antes, null);
         await saveDB();
         showToast('Livro excluído.');
         renderAll();
         renderAdmin();
-        carregarEditBookSelect();
         limparCamposEdicao();
       }
     };
 
     function carregarLivroSemanaConfig() {
-      document.getElementById('cfgLivroSemana').value = DB.settings.livroSemanaId || '';
+      const select = document.getElementById('cfgLivroSemana');
+      if (!select) return;
+      const atual = DB.settings.livroSemanaId || '';
+      select.innerHTML = '<option value="">— Nenhum destaque —</option>' + DB.books
+        .filter(book => !book.archived && book.status !== 'arquivado')
+        .sort((a, b) => a.titulo.localeCompare(b.titulo, 'pt-BR'))
+        .map(book => `<option value="${escapeHTML(book.id)}">${escapeHTML(book.titulo)} — ${escapeHTML(book.autor || '')}</option>`).join('');
+      select.value = atual;
     }
 
     function renderLivroSemana() {
@@ -3567,13 +4844,20 @@
     document.getElementById('saveConfigBtn').onclick = async () => {
       const prazo = parseInt(document.getElementById('cfgPrazo').value, 10);
       const multa = parseFloat(document.getElementById('cfgMulta').value);
-      const livroSemanaId = document.getElementById('cfgLivroSemana').value.trim();
-      DB.settings.prazoDias = prazo > 0 ? prazo : DB.settings.prazoDias;
-      DB.settings.multaPorDia = isNaN(multa) ? DB.settings.multaPorDia : Math.max(0, multa);
+      const livroSemanaId = document.getElementById('cfgLivroSemana').value;
+      if (!Number.isInteger(prazo) || prazo < 1 || !Number.isFinite(multa) || multa < 0) {
+        showToast('Informe prazo e multa válidos.'); return;
+      }
+      const antes = JSON.parse(JSON.stringify(DB.settings));
+      DB.settings.prazoDias = prazo;
+      DB.settings.multaPorDia = multa;
+      DB.settings.limiteLivros = Math.max(1, Number(DB.settings.limiteLivros) || LIMITE_LIVROS_POR_USUARIO);
       DB.settings.livroSemanaId = livroSemanaId || null;
+      await registrarAuditoria('configuracao', 'settings', 'library', antes, DB.settings);
       await saveDB();
-      showToast('✅ Configurações salvas.');
+      showToast('Configurações salvas.');
       renderLivroSemana();
+      renderAdminStats();
     };
 
     // ---- Sugestões usuário e favoritos ----
@@ -3662,6 +4946,135 @@
       `).join('');
     }
 
+    async function enviarSuporte(event) {
+      if (event) event.preventDefault();
+      const form = document.getElementById('supportForm');
+      const statusEl = document.getElementById('supportStatus');
+      const submit = document.getElementById('supportSubmit');
+      const dados = {
+        nome: document.getElementById('supportName').value,
+        email: document.getElementById('supportEmail').value,
+        categoria: document.getElementById('supportCategory').value,
+        pagina: document.getElementById('supportPage').value,
+        mensagem: document.getElementById('supportMessage').value
+      };
+      if (dados.email.trim() && !isValidEmail(dados.email)) {
+        statusEl.textContent = 'Informe um e-mail válido ou deixe o campo em branco.';
+        return;
+      }
+      if (dados.mensagem.trim().length < 10) {
+        statusEl.textContent = 'Descreva a dificuldade com pelo menos 10 caracteres.';
+        return;
+      }
+      submit.disabled = true;
+      submit.textContent = 'Enviando...';
+      statusEl.textContent = '';
+      const relato = criarSolicitacaoSuporte(dados);
+      await registrarAuditoria('criar', 'suporte', relato.id, null, relato);
+      const ok = await saveDB();
+      submit.disabled = false;
+      submit.textContent = 'Enviar relato';
+      if (!ok) { statusEl.textContent = 'Não foi possível enviar o relato. Tente novamente.'; return; }
+      statusEl.textContent = 'Relato enviado. A equipe da biblioteca vai analisar a situação.';
+      form.reset();
+      renderSuporteUsuario();
+      renderSuporteAdmin();
+    }
+
+    function renderSuporteUsuario() {
+      const container = document.getElementById('supportList');
+      if (!container) return;
+      const user = getUsuarioLogado();
+      if (user) {
+        const name = document.getElementById('supportName');
+        const email = document.getElementById('supportEmail');
+        if (name && !name.value) name.value = user.nome || '';
+        if (email && !email.value) email.value = user.email || '';
+      }
+      if (!user) {
+        container.innerHTML = '<div class="empty">Faça login para acompanhar seus relatos enviados.</div>';
+        return;
+      }
+      const relatos = DB.suporte.filter(relato => relato.userId === user.id);
+      if (!relatos.length) {
+        container.innerHTML = '<div class="empty">Nenhum relato enviado ainda.</div>';
+        return;
+      }
+      container.innerHTML = `<h3 style="font-size:1rem; margin:18px 0 4px;">Seus relatos</h3>` + relatos.map(relato => `
+        <article class="support-ticket">
+          <div class="support-ticket-meta"><span class="support-status-tag">${escapeHTML(formatarStatusSuporte(relato.status))}</span><span>${escapeHTML(formatarCategoriaSuporte(relato.categoria))}</span><span>${fmtData(relato.criadoEm)}</span></div>
+          <p>${escapeHTML(relato.mensagem)}</p>
+          ${relato.respostaAdmin ? `<p><strong>Resposta da biblioteca:</strong> ${escapeHTML(relato.respostaAdmin)}</p>` : '<small class="field-hint">Aguardando resposta da biblioteca.</small>'}
+        </article>`).join('');
+    }
+
+    function renderSuporteAdmin() {
+      const container = document.getElementById('supportAdminList');
+      if (!container) return;
+      const filtro = document.getElementById('supportStatusFilter')?.value || 'todos';
+      const relatos = DB.suporte.filter(relato => filtro === 'todos' || relato.status === filtro)
+        .slice().sort((a, b) => new Date(b.criadoEm) - new Date(a.criadoEm));
+      if (!relatos.length) {
+        container.innerHTML = '<div class="empty">Nenhum relato de suporte neste filtro.</div>';
+        return;
+      }
+      container.innerHTML = relatos.map(relato => `
+        <article class="support-ticket admin-support-ticket" data-support-card="${escapeHTML(relato.id)}">
+          <div class="support-ticket-meta"><strong>${escapeHTML(relato.usuarioNome || 'Leitor')}</strong><span>${escapeHTML(relato.email || 'Sem e-mail')}</span><span>${escapeHTML(formatarCategoriaSuporte(relato.categoria))}</span><span>${fmtData(relato.criadoEm)}</span></div>
+          ${relato.pagina ? `<div class="field-hint">Fluxo: ${escapeHTML(relato.pagina)}</div>` : ''}
+          <p>${escapeHTML(relato.mensagem)}</p>
+          <div class="support-admin-controls">
+            <select data-support-status="${escapeHTML(relato.id)}" aria-label="Status do relato de ${escapeHTML(relato.usuarioNome || 'leitor')}">
+              ${Object.values(SUPPORT_STATUS).map(status => `<option value="${status}" ${relato.status === status ? 'selected' : ''}>${formatarStatusSuporte(status)}</option>`).join('')}
+            </select>
+            <textarea data-support-reply="${escapeHTML(relato.id)}" maxlength="1000" placeholder="Resposta administrativa...">${escapeHTML(relato.respostaAdmin || '')}</textarea>
+            <button class="btn small" type="button" data-support-save="${escapeHTML(relato.id)}">Salvar</button>
+          </div>
+        </article>`).join('');
+      if (container._supportListenerAdded) return;
+      container.addEventListener('click', event => {
+        const button = event.target.closest('[data-support-save]');
+        if (!button) return;
+        const card = button.closest('[data-support-card]');
+        const reply = card?.querySelector('[data-support-reply]')?.value || '';
+        const status = card?.querySelector('[data-support-status]')?.value || SUPPORT_STATUS.ABERTO;
+        processarSuporteAdmin(button.dataset.supportSave, status, reply);
+      });
+      container.addEventListener('change', event => {
+        const select = event.target.closest('[data-support-status]');
+        if (!select) return;
+        const card = select.closest('[data-support-card]');
+        const reply = card?.querySelector('[data-support-reply]')?.value || '';
+        processarSuporteAdmin(select.dataset.supportStatus, select.value, reply);
+      });
+      container._supportListenerAdded = true;
+    }
+
+    async function processarSuporteAdmin(relatoId, status, respostaAdmin) {
+      const relato = DB.suporte.find(item => item.id === relatoId);
+      if (!relato || !Object.values(SUPPORT_STATUS).includes(status)) return;
+      const antes = JSON.parse(JSON.stringify(relato));
+      const actor = getAdminActor();
+      const agora = new Date().toISOString();
+      atualizarSolicitacaoSuporte(relatoId, {
+        status,
+        respostaAdmin: String(respostaAdmin || '').trim().slice(0, 1000),
+        administradorId: actor.id,
+        administradorNome: actor.nome,
+        respondidoEm: String(respostaAdmin || '').trim() ? agora : relato.respondidoEm
+      });
+      await registrarAuditoria('atualizar_suporte', 'suporte', relato.id, antes, relato);
+      const ok = await saveDB();
+      if (!ok) return;
+      if (relato.userId && (relato.respostaAdmin || status === SUPPORT_STATUS.RESOLVIDO)) {
+        await notificarUsuario(relato.userId, `Atualização do seu relato: ${formatarStatusSuporte(status)}${relato.respostaAdmin ? ' — ' + relato.respostaAdmin : ''}`, 'suporte_atualizado', relato.id + ':' + relato.atualizadoEm, 'normal');
+      }
+      showToast('Relato de suporte atualizado.');
+      renderSuporteAdmin();
+      renderSuporteUsuario();
+      renderAuditoriaAdmin();
+    }
+
     document.getElementById('enviarSugestao').onclick = enviarSugestao;
 
     // ---- Tema ----
@@ -3695,9 +5108,92 @@
       t._timer = setTimeout(() => t.classList.remove('show'), 3000);
     }
 
+    let lastFocusedElement = null;
+
+    function openOverlay(id, trigger = document.activeElement) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      lastFocusedElement = trigger;
+      el.classList.add('show');
+      document.body.classList.add('modal-open');
+      const focusable = el.querySelector('button, input, select, textarea, [tabindex]:not([tabindex="-1"])');
+      if (focusable) setTimeout(() => focusable.focus(), 0);
+    }
+
     function closeOverlay(id) {
       const el = document.getElementById(id);
       if (el) el.classList.remove('show');
+      if (!document.querySelector('.overlay.show')) document.body.classList.remove('modal-open');
+      if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+        lastFocusedElement.focus();
+        lastFocusedElement = null;
+      }
+    }
+
+    function processarArquivoCapa(file) {
+      return new Promise((resolve, reject) => {
+        if (!file || !ALLOWED_COVER_TYPES.includes(file.type)) {
+          reject(new Error('Formato inválido. Use JPG, PNG ou WEBP.'));
+          return;
+        }
+        if (file.size > MAX_COVER_FILE_SIZE) {
+          reject(new Error('A imagem deve ter no máximo 2 MB.'));
+          return;
+        }
+        const reader = new FileReader();
+        reader.onerror = () => reject(new Error('Não foi possível ler a imagem.'));
+        reader.onload = () => {
+          const image = new Image();
+          image.onerror = () => reject(new Error('Imagem corrompida ou inválida.'));
+          image.onload = () => {
+            const maxSide = 1200;
+            const scale = Math.min(1, maxSide / Math.max(image.naturalWidth, image.naturalHeight));
+            const canvas = document.createElement('canvas');
+            canvas.width = Math.max(1, Math.round(image.naturalWidth * scale));
+            canvas.height = Math.max(1, Math.round(image.naturalHeight * scale));
+            const context = canvas.getContext('2d');
+            if (!context) { reject(new Error('Não foi possível preparar a imagem.')); return; }
+            context.drawImage(image, 0, 0, canvas.width, canvas.height);
+            resolve(canvas.toDataURL('image/jpeg', .84));
+          };
+          image.src = reader.result;
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function setupCoverPicker(dropzoneId, inputId, onReady, statusId) {
+      const dropzone = document.getElementById(dropzoneId);
+      const input = document.getElementById(inputId);
+      if (!dropzone || !input) return;
+      const choose = () => input.click();
+      input.addEventListener('click', event => event.stopPropagation());
+      dropzone.addEventListener('click', choose);
+      dropzone.addEventListener('keydown', event => {
+        if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); choose(); }
+      });
+      ['dragenter', 'dragover'].forEach(name => dropzone.addEventListener(name, event => {
+        event.preventDefault(); dropzone.classList.add('is-dragging');
+      }));
+      ['dragleave', 'drop'].forEach(name => dropzone.addEventListener(name, event => {
+        event.preventDefault(); dropzone.classList.remove('is-dragging');
+      }));
+      const handle = async file => {
+        if (!file) return;
+        const status = statusId ? document.getElementById(statusId) : null;
+        if (status) status.textContent = 'Preparando imagem...';
+        try {
+          const dataUrl = await processarArquivoCapa(file);
+          onReady(dataUrl, file);
+          if (status) status.textContent = `Imagem pronta: ${file.name}`;
+        } catch (error) {
+          if (status) status.textContent = error.message;
+          showToast(error.message);
+          input.value = '';
+        }
+      };
+      input.addEventListener('change', event => handle(event.target.files?.[0]));
+      dropzone.addEventListener('drop', event => handle(event.dataTransfer?.files?.[0]));
     }
 
     // ---- Inicialização ----
@@ -3713,6 +5209,13 @@
         });
       }
 
+      const searchButton = document.getElementById('searchBtn');
+      if (searchButton) searchButton.addEventListener('click', () => {
+        UI_STATE.busca = document.getElementById('searchInput').value;
+        renderGrid();
+        logSearch(UI_STATE.busca);
+      });
+
       const selectOrdenacao = document.getElementById('sortSelect');
       if (selectOrdenacao) {
         selectOrdenacao.addEventListener('change', (e) => {
@@ -3720,6 +5223,19 @@
           renderGrid();
         });
       }
+
+      ['filterAvailability', 'filterGenre', 'filterAuthor', 'filterLanguage', 'filterYear'].forEach(id => {
+        const field = document.getElementById(id);
+        if (!field) return;
+        field.addEventListener(field.tagName === 'INPUT' ? 'input' : 'change', () => renderGrid());
+      });
+
+      const supportForm = document.getElementById('supportForm');
+      if (supportForm) supportForm.addEventListener('submit', enviarSuporte);
+      const supportFilter = document.getElementById('supportStatusFilter');
+      if (supportFilter) supportFilter.addEventListener('change', renderSuporteAdmin);
+      const adminSearchUser = document.getElementById('adminSearchUser');
+      if (adminSearchUser) adminSearchUser.addEventListener('input', renderUsuarios);
 
       const btnTema = document.getElementById('themeToggleBtn');
       if (btnTema) {
@@ -3731,8 +5247,13 @@
 
       document.querySelectorAll('.overlay').forEach(ov => {
         ov.addEventListener('click', (e) => {
-          if (e.target === ov) ov.classList.remove('show');
+          if (e.target === ov) closeOverlay(ov.id);
         });
+      });
+      document.addEventListener('keydown', event => {
+        if (event.key !== 'Escape') return;
+        const opened = document.querySelector('.overlay.show');
+        if (opened) closeOverlay(opened.id);
       });
 
       document.querySelectorAll('[data-close]').forEach(btn => {
@@ -3744,15 +5265,17 @@
         if (panel) panel.classList.toggle('show');
       });
 
-      document.getElementById('devTrigger').addEventListener('click', () => {
-        document.getElementById('loginOverlay').classList.add('show');
+      document.getElementById('devTrigger').addEventListener('click', event => {
+        document.getElementById('loginErr').style.display = 'none';
+        document.getElementById('adminPass').value = '';
+        openOverlay('loginOverlay', event.currentTarget);
       });
 
       document.getElementById('loginBtn').addEventListener('click', () => {
         const pass = document.getElementById('adminPass').value;
         if (pass === ADMIN_PASSWORD) {
           closeOverlay('loginOverlay');
-          document.getElementById('adminOverlay').classList.add('show');
+          openOverlay('adminOverlay', document.getElementById('devTrigger'));
           renderAdmin();
         } else {
           document.getElementById('loginErr').style.display = 'block';
@@ -3760,91 +5283,128 @@
       });
 
       document.getElementById('adminTabs').addEventListener('click', (e) => {
-        const btn = e.target.closest('button[data-tab]');
+        const btn = e.target.closest('button[data-group]');
         if (!btn) return;
-        document.querySelectorAll('#adminTabs button').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        document.querySelectorAll('.admin-panel').forEach(p => p.classList.remove('show'));
-        document.getElementById('tab-' + btn.dataset.tab).classList.add('show');
-        if (btn.dataset.tab === 'painel') renderDashboardCharts();
+        setAdminGroup(btn.dataset.group);
       });
 
-      // Busca automática de capa
-      document.getElementById('nIsbn').addEventListener('blur', async () => {
+      // Busca automática e seleção de capa no cadastro.
+      const isbnNovo = document.getElementById('nIsbn');
+      if (isbnNovo) isbnNovo.addEventListener('blur', async () => {
         const manual = document.getElementById('nCapaManual').value.trim();
-        if (manual) return;
-        const isbn = document.getElementById('nIsbn').value.trim();
+        if (manual || capaArquivoDataUrl) return;
+        const isbn = normalizeISBN(isbnNovo.value);
         if (!isbn) return;
         const status = document.getElementById('capaStatus');
         const preview = document.getElementById('capaPreview');
+        if (!isValidISBN(isbn)) { status.textContent = 'ISBN inválido.'; return; }
+        const token = ++capaBuscaToken;
         status.textContent = 'Buscando capa...';
         const url = await buscarCapaPorISBN(isbn);
-        if (url) { preview.src = url;
-          preview.style.display = 'block';
-          status.textContent = 'Capa encontrada.'; } else { preview.style.display = 'none';
-          status.textContent = 'Capa não encontrada.'; }
+        if (token !== capaBuscaToken) return;
+        if (url) { preview.src = url; preview.style.display = 'block'; status.textContent = 'Capa encontrada. Confirme antes de salvar.'; }
+        else { preview.style.display = 'none'; status.textContent = 'Capa não encontrada. Você pode informar uma URL ou arquivo.'; }
       });
 
-      document.getElementById('nCapaManual').addEventListener('input', () => {
-        const manual = document.getElementById('nCapaManual').value.trim();
+      const capaManualNovo = document.getElementById('nCapaManual');
+      if (capaManualNovo) capaManualNovo.addEventListener('input', () => {
+        const manual = capaManualNovo.value.trim();
         const preview = document.getElementById('capaPreview');
         const status = document.getElementById('capaStatus');
-        if (manual) {
-          document.getElementById('nCapaArquivo').value = '';
-          preview.src = manual;
-          preview.style.display = 'block';
-          status.textContent = 'Usando URL.';
-        }
+        if (!manual) { preview.style.display = 'none'; status.textContent = ''; return; }
+        if (!safeImageUrl(manual)) { status.textContent = 'URL inválida. Use http ou https.'; preview.style.display = 'none'; return; }
+        document.getElementById('nCapaArquivo').value = '';
+        capaArquivoDataUrl = null;
+        preview.src = safeImageUrl(manual);
+        preview.style.display = 'block';
+        status.textContent = 'Usando URL informada.';
       });
 
-      let capaArquivoDataUrl = null;
-      document.getElementById('nCapaArquivo').addEventListener('change', e => {
-        const file = e.target.files && e.target.files[0];
-        const preview = document.getElementById('capaPreview');
-        const status = document.getElementById('capaStatus');
-        if (!file) { capaArquivoDataUrl = null; return; }
+      setupCoverPicker('nCapaDropzone', 'nCapaArquivo', dataUrl => {
+        capaArquivoDataUrl = dataUrl;
         document.getElementById('nCapaManual').value = '';
-        const reader = new FileReader();
-        reader.onload = () => {
-          capaArquivoDataUrl = reader.result;
-          preview.src = capaArquivoDataUrl;
-          preview.style.display = 'block';
-          status.textContent = 'Usando arquivo: ' + escapeHTML(file.name);
-        };
-        reader.readAsDataURL(file);
+        const preview = document.getElementById('capaPreview');
+        preview.src = dataUrl;
+        preview.style.display = 'block';
+      }, 'capaStatus');
+
+      setupCoverPicker('eCapaDropzone', 'eCapaArquivo', dataUrl => {
+        editCapaDataUrl = dataUrl;
+        editCapaRemovida = false;
+        document.getElementById('eCapa').value = '';
+        renderEditCover(dataUrl, 'Nova capa selecionada.');
+      }, 'eCapaStatus');
+
+      const buscarCapaEdit = document.getElementById('eBuscarCapaEdit');
+      if (buscarCapaEdit) buscarCapaEdit.addEventListener('click', async () => {
+        const isbn = normalizeISBN(document.getElementById('eIsbn').value);
+        const status = document.getElementById('eCapaStatus');
+        if (!isValidISBN(isbn)) { status.textContent = 'Informe um ISBN válido primeiro.'; return; }
+        buscarCapaEdit.disabled = true;
+        buscarCapaEdit.textContent = 'Buscando...';
+        const url = await buscarCapaPorISBN(isbn);
+        buscarCapaEdit.disabled = false;
+        buscarCapaEdit.textContent = 'Buscar por ISBN';
+        if (!url) { status.textContent = 'Capa não encontrada.'; return; }
+        editCapaDataUrl = url;
+        editCapaRemovida = false;
+        document.getElementById('eCapa').value = url;
+        renderEditCover(url, 'Capa encontrada.');
+      });
+
+      const eCapa = document.getElementById('eCapa');
+      if (eCapa) eCapa.addEventListener('input', () => {
+        const url = safeImageUrl(eCapa.value);
+        editCapaDataUrl = null;
+        editCapaRemovida = false;
+        if (eCapa.value.trim() && !url) {
+          document.getElementById('eCapaStatus').textContent = 'URL inválida. Use http ou https.';
+          return;
+        }
+        renderEditCover(url, url ? 'Usando URL informada.' : 'Capa atual mantida.');
+      });
+
+      const removerCapa = document.getElementById('eRemoverCapa');
+      if (removerCapa) removerCapa.addEventListener('click', () => {
+        editCapaDataUrl = null;
+        editCapaRemovida = true;
+        document.getElementById('eCapa').value = '';
+        renderEditCover('', 'A capa será removida ao salvar.');
       });
 
       document.getElementById('addBookBtn').onclick = async () => {
+        const addBtn = document.getElementById('addBookBtn');
         const titulo = document.getElementById('nTitulo').value.trim();
         const autor = document.getElementById('nAutor').value.trim();
-        const isbn = document.getElementById('nIsbn').value.trim();
+        const isbn = normalizeISBN(document.getElementById('nIsbn').value.trim());
         const editora = document.getElementById('nEditora').value.trim();
-        const ano = document.getElementById('nAno').value.trim();
+        const ano = Number.parseInt(document.getElementById('nAno').value, 10);
         const genero = document.getElementById('nGenero').value.trim() || 'Geral';
-        const paginas = document.getElementById('nPaginas').value.trim();
+        const paginas = Number.parseInt(document.getElementById('nPaginas').value, 10);
         const idioma = document.getElementById('nIdioma').value.trim() || 'Português';
         const traducao = document.getElementById('nTraducao').value.trim();
         const sinopse = document.getElementById('nSinopse').value.trim();
-        const estoque = parseInt(document.getElementById('nEstoque').value, 10) || 0;
+        const estoque = Number.parseInt(document.getElementById('nEstoque').value, 10);
         const capaManual = document.getElementById('nCapaManual').value.trim();
         const err = document.getElementById('novoLivroErr');
 
-        if (!titulo || !autor) { err.textContent = 'Título e autor são obrigatórios.';
-          err.style.display = 'block'; return; }
+        const mensagemErro = !titulo || !autor ? 'Título e autor são obrigatórios.'
+          : isbn && !isValidISBN(isbn) ? 'ISBN inválido.'
+          : isbn && DB.books.some(book => normalizeISBN(book.isbn) === isbn) ? 'Já existe um livro com este ISBN.'
+          : !Number.isInteger(ano) || ano < 0 || ano > new Date().getFullYear() + 1 ? 'Ano de publicação inválido.'
+          : !Number.isInteger(paginas) || paginas < 0 ? 'Número de páginas inválido.'
+          : !Number.isInteger(estoque) || estoque < 0 ? 'Quantidade em estoque inválida.'
+          : capaManual && !safeImageUrl(capaManual) ? 'URL de capa inválida. Use http ou https.' : '';
+        if (mensagemErro) { err.textContent = mensagemErro; err.style.display = 'block'; return; }
         err.style.display = 'none';
 
-        let capa = capaArquivoDataUrl || capaManual || null;
-        const addBtn = document.getElementById('addBookBtn');
-        if (!capa && isbn) {
-          addBtn.disabled = true;
-          addBtn.textContent = 'Buscando capa...';
-          capa = await buscarCapaPorISBN(isbn);
-          addBtn.disabled = false;
-          addBtn.textContent = 'Adicionar à biblioteca';
-        }
+        let capa = capaArquivoDataUrl || safeImageUrl(capaManual) || null;
+        addBtn.disabled = true;
+        addBtn.textContent = capa ? 'Salvando...' : 'Buscando capa...';
+        if (!capa && isbn) capa = await buscarCapaPorISBN(isbn);
 
-        DB.books.push({
-          id: 'b' + Date.now(),
+        const book = {
+          id: 'b' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
           titulo,
           autor,
           isbn,
@@ -3852,15 +5412,23 @@
           ano,
           genero,
           idioma,
-          traducao,
+          traducao: traducao || null,
           paginas,
           sinopse,
-          capa,
+          capa: capa || '',
           estoqueTotal: estoque,
           estoqueDisp: estoque,
-          avaliacoes: []
-        });
-        await saveDB();
+          avaliacoes: [],
+          archived: false,
+          status: 'ativo',
+          adicionadoEm: new Date().toISOString()
+        };
+        DataService.createBook(book);
+        await registrarAuditoria('criar', 'book', book.id, null, book);
+        const ok = await saveDB();
+        addBtn.disabled = false;
+        addBtn.textContent = 'Adicionar à biblioteca';
+        if (!ok) return;
         ['nTitulo', 'nAutor', 'nIsbn', 'nEditora', 'nAno', 'nGenero', 'nPaginas', 'nTraducao', 'nSinopse', 'nEstoque',
           'nCapaManual', 'nCapaArquivo'
         ].forEach(id => document.getElementById(id).value = '');
@@ -3868,10 +5436,9 @@
         document.getElementById('capaPreview').style.display = 'none';
         document.getElementById('capaStatus').textContent = '';
         capaArquivoDataUrl = null;
-        showToast('✅ Livro adicionado.');
+        showToast('Livro adicionado à biblioteca.');
         renderAll();
         renderAdmin();
-        carregarEditBookSelect();
       };
 
       // Sidebar scroll spy
@@ -3905,13 +5472,18 @@
     }
 
     async function init() {
-      // Aplica a logo em todos os elementos com classe 'logo-icon'
+      // Aplica a logo fornecida em todos os elementos com classe 'logo-icon'.
       document.querySelectorAll('.logo-icon').forEach(img => {
-        img.src = LOGO_DATA_URI;
+        img.src = LOGO_SRC;
+        img.addEventListener('error', () => {
+          img.src = LOGO_DATA_URI;
+        }, { once: true });
       });
 
       await loadDB();
       await loadSession();
+      await verificarPrazos();
+      window.setInterval(verificarPrazos, 60 * 60 * 1000);
 
       const tema = getTheme();
       setTheme(tema);
